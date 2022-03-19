@@ -6,6 +6,8 @@ head(isotope_data)
 unique(isotope_data$Taxa)
 ?barplot
 
+table(isotope_data$Species_ID)
+
 #barplots by taxa means
 mean_taxa_pedino = tapply(isotope_data$pedino_13C_enrichment, isotope_data$Taxa, mean)
 mean_taxa_pedino_percent = tapply(isotope_data$atom_13C_percent,isotope_data$Taxa, mean)
@@ -28,12 +30,16 @@ mean_site_pico_percent = tapply(isotope_data$atom_15N_percent,isotope_data$Panel
 barplot(mean_site_pico,las=2)
 barplot(mean_site_pico_percent, las=2)
 
-
+pedinotaxa = lm(isotope_data$pedino_13C_enrichment ~ isotope_data$Taxa)
+pedinosite = lm(isotope_data$pedino_13C_enrichment ~ isotope_data$Panel_Site)
 
 unique(isotope_data$Panel_Site)
 summary(pedinosite)
 
+pedinospecies = lm(isotope_data$pedino_13C_enrichment ~ isotope_data$Species_ID)
 
+
+summary(pedinospecies)
 # pico_cytometry <- cytometry_file[ -c(0,14:25) ]
 # pico_cytometry
 # pedino_cytometry <- cytometry_file[ -c(0,2:13) ]
