@@ -54,8 +54,7 @@ picosite = lm(isotope_data$pico_15N_enrichment ~ isotope_data$Panel_Site)
 
 summary(picotaxa)
 summary(picosite)
-
-
+head(isotope_data)
 
 #str(dune_mds)
 
