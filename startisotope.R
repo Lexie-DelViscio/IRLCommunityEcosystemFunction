@@ -38,25 +38,79 @@ ggplot(data = isotope_data) +
   geom_boxplot(mapping = aes(x = Taxa, y = pico_15N_enrichment)) +  
   labs(x = 'Taxa', y = 'pico_15N_enrichment', title = 'taxa vs pico_15N_enrichment') 
 
-pedinotaxa = lm(isotope_data$pedino_13C_enrichment ~ isotope_data$Taxa)
-pedinosite = lm(isotope_data$pedino_13C_enrichment ~ isotope_data$Panel_Site)
+pedinotaxa = lm(isotope_data$pedino_13C_enrichment ~ -1 + isotope_data$Taxa)
+pedinosite = lm(isotope_data$pedino_13C_enrichment ~ -1 + isotope_data$Panel_Site)
 
 unique(isotope_data$Panel_Site)
 summary(pedinosite)
 summary(pedinotaxa)
 
-pedinospecies = lm(isotope_data$pedino_13C_enrichment ~ isotope_data$Species_ID)
+pedinospecies = lm(isotope_data$pedino_13C_enrichment ~ -1 + isotope_data$Species_ID)
 summary(pedinospecies)
 
 
-picotaxa = lm(isotope_data$pico_15N_enrichment ~ isotope_data$Taxa)
-picosite = lm(isotope_data$pico_15N_enrichment ~ isotope_data$Panel_Site)
+picotaxa = lm(isotope_data$pico_15N_enrichment ~ -1 + isotope_data$Taxa)
+picosite = lm(isotope_data$pico_15N_enrichment ~ -1 + isotope_data$Panel_Site)
 
 summary(picotaxa)
 summary(picosite)
 head(isotope_data)
 
+picospecies = lm(isotope_data$pico_15N_enrichment ~ -1 + isotope_data$Species_ID)
+
+length(unique(isotope_data$Species_ID))
+
+plot(table(isotope_data$Species_ID), las=2)
+summary(picospecies)
 #str(dune_mds)
+
+# subset analysis of all the isotope species 
+# species consistently showing small or weak dependency
+# deterministic vs stochastic 
+
+unique(isotope_data$Panel_Site)
+
+# subsets by Panel
+FC_isotope <- subset(isotope_data, isotope_data$Panel_Site == "FC")
+head(FC_isotope)
+length(unique(FC_isotope$Species_ID))
+
+HI_isotope <- subset(isotope_data, isotope_data$Panel_Site == "HI")
+head(HI_isotope)
+length(unique(HI_isotope$Species_ID))
+
+ID_isotope <- subset(isotope_data, isotope_data$Panel_Site == "ID")
+head(ID_isotope)
+length(unique(ID_isotope$Species_ID))
+
+IRL3_isotope <- subset(isotope_data, isotope_data$Panel_Site == "IRL3")
+head(IRL3_isotope)
+length(unique(IRL3_isotope$Species_ID))
+
+MIM_isotope <- subset(isotope_data, isotope_data$Panel_Site == "MIM")
+head(MIM_isotope)
+length(unique(MIM_isotope$Species_ID))
+
+MO2_isotope <- subset(isotope_data, isotope_data$Panel_Site == "MO2")
+head(MO2_isotope)
+length(unique(MO2_isotope$Species_ID))
+
+SCD_isotope <- subset(isotope_data, isotope_data$Panel_Site == "SCD")
+head(SCD_isotope)
+length(unique(SCD_isotope$Species_ID))
+
+SMS_isotope <- subset(isotope_data, isotope_data$Panel_Site == "SMS")
+head(SMS_isotope)
+length(unique(SMS_isotope$Species_ID))
+
+WP_isotope <- subset(isotope_data, isotope_data$Panel_Site == "WP")
+head(WP_isotope)
+length(unique(WP_isotope$Species_ID))
+
+library("priceTools")
+
+
+#NOTES
 
 # pico_cytometry <- cytometry_file[ -c(0,14:25) ]
 # pico_cytometry
@@ -65,8 +119,8 @@ head(isotope_data)
 # 
 # 
 # time_values = list(5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180)
+#   site by species 
+# role of envirnomnemt - portfolio affect 
 # 
-# 
-#   
-  
+
     
