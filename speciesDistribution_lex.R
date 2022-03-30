@@ -33,5 +33,5 @@ text(community_panel_data$FC_04[which(community_panel_data$FC_04 > 0)], labels=c
 
 
 
-## Now we will examine species abundance per site (group/subset each of the 1-4 panels into a site location)
+# Now we will examine species abundance per site (group/subset each of the 1-4 panels into a site location)
 
