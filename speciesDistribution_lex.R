@@ -12,8 +12,14 @@ species_id
 #also suspensionfeeders$Species
 ## First we want to look at overall species abundance/richness among all panels
 # Looking at simple species abundance rather than correlation with any other variable
-
+library(tidyr)
+?pivot_longer
 par(mfrow=c(1,4))
+Longer = community_panel_data %>%
+  pivot_longer(everything(),
+               names_to = c(".value"))
+Longer
+
 
 plot(community_panel_data$FC_01[which(community_panel_data$FC_01 > 0)])
 text(community_panel_data$FC_01[which(community_panel_data$FC_01 > 0)], labels=community_panel_data$Species[which(community_panel_data$FC_01 > 0)], cex=0.9, font=1)
