@@ -74,6 +74,10 @@ matplot(t(pedinoSMS), type = "l")
 matplot(t(pedinoWP), type = "l")
 matplot(t(pedinoControl), type = "l")
 
-##new file
-## test for fran pulling
+##dpyr::pivot_to_long - this will allow for changing the time 
+##add rate of change
+##characterize community response at ecosystem - combine with panel data to see any strong species effect
+
+## X label/axis is time intervals (1-12) rather than exact minute intervals
+
 
