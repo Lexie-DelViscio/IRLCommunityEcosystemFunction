@@ -191,29 +191,29 @@ SMSandWP = subset(isotope_data, (isotope_data$Panel_Site == "SMS" | isotope_data
 SMSandWP = drop_na(data=SMSandWP)
 tail(SMSandWP)
 library(dplyr)
-SMSandWP_group_by <- SMSandWP %>% group_by(Species_ID)
+SMSandWP_group_by <- SMSandWP %>% group_by(Panel_Site)
 SMSandWP_group_by
-by_pico <- isotope_data %>% group_by(pico_15N_enrichment)
+by_Panel_Site <- isotope_data %>% group_by(Panel_Site)
 group_isotope
+
+# priceTools start-
+# ask Prof. about what we should eb grouping by and what the function should be-
+
 library(priceTools)
-SMSandWP_pairwise_price = priceTools::pairwise.price(x = SMSandWP_group_by, species = "Species_ID", func = "pedino_13C_enrichment")
-SMSandWP_dist = priceTools::get.dist.mats(SMSandWP_pairwise_price)
+SMSandWP_pairwise_price = pairwise.price(x = SMSandWP_group_by, species = "Species_ID", func = "pedino_13C_enrichment")
+SMSandWP_dist = get.dist.mats(SMSandWP_pairwise_price)
 SMSandWP_pairwise_price = drop_na(SMSandWP_pairwise_price)
 
-processed_SMSandWP = priceTools::process.data.bef(SMSandWP_pairwise_price)
+processed_SMSandWP = process.data.price(SMSandWP_pairwise_price)
 priceTools::leap.zig.price(processed_SMSandWP)
 
-#NOTES
+by_Panel_Site_pairwise_13 = pairwise.price(x = by_Panel_Site, species = "Species_ID", func = "pedino_13C_enrichment")
+by_Panel_Site_dist_13 = get.dist.mats(by_Panel_Site_pairwise_13)
+by_Panel_Site_pairwise_13 = drop_na(by_Panel_Site_pairwise_13)
+processed_by_site_13 = process.data.price(by_Panel_Site_pairwise_13)
+priceTools::leap.zig.price(processed_by_site_13)
 
-# pico_cytometry <- cytometry_file[ -c(0,14:25) ]
-# pico_cytometry
-# pedino_cytometry <- cytometry_file[ -c(0,2:13) ]
-# pedino_cytometry
-# 
-# 
-# time_values = list(5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180)
-#   site by species 
-# role of envirnomnemt - portfolio affect 
-# 
+
+
 
     
