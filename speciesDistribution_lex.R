@@ -15,10 +15,15 @@ species_id
 library(tidyr)
 ?pivot_longer
 par(mfrow=c(1,4))
-Longer = community_panel_data %>%
-  pivot_longer(everything(),
-               names_to = c(".value"))
-Longer
+
+Long_community_panel = community_panel_data %>%
+  pivot_longer(cols = c(FC_01, FC_02, FC_03, FC_04, HI_01, HI_02, HI_03, HI_04,ID_01, ID_03, IRL3_01, IRL3_02, IRL3_03, IRL3_04, MIM_01, MIM_02, MO_01, MO_02, MO_03, SCD_01,SCD_02, SCD_03, SMS_01, SMS_03, WP_01, WP_03, WP_04), names_to = c("Site"))
+
+               
+head(Long_community_panel)
+Long_community_panel = subset(Long_community_panel, select = -c(NA.))
+head(Long_community_panel)
+head(community_panel_data)
 
 
 plot(community_panel_data$FC_01[which(community_panel_data$FC_01 > 0)])
