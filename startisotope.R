@@ -214,13 +214,22 @@ processed_by_site_13 = process.data.price(by_Panel_Site_pairwise_13)
 leap.zig.price(processed_by_site_13)
 
 head(isotope_data)
+isotope_data
 
 # questions about wider
-pedino_subset <- isotope_data[c('Site_and_Panel',"Species_ID","pedino_13C_enrichment")]
+pedino_subset <- isotope_data[c('Site_and_Panel',"Species_ID","pedino_13C_enrichment","atom_13C_percent")]
 head(pedino_subset)
 class(pedino_subset$pedino_13C_enrichment[0])
+pico_subset <- isotope_data[c('Site_and_Panel',"Species_ID","pico_15N_enrichment")]
 
+pico_subset_edited <- pico_subset
+pico_subset_edited$pico_15N_enrichment = as.numeric(pico_subset_edited$pico_15N_enrichment)
+pico_subset_edited$Species_ID = as.factor(pico_subset_edited$Species_ID)
+pico_subset_edited$Site_and_Panel = as.factor(pico_subset_edited$Site_and_Panel)
 
+pico_subset_edited[,"pico_15N_enrichment"] <- sapply(pico_subset_edited[,"pico_15N_enrichment"], as.factor)
+
+head(pedino_subset)
 
 library(tidyr)
 # fish_encounters %>% pivot_wider(
@@ -232,3 +241,12 @@ library(tidyr)
 vignette("pivot")
 
 ?dbl
+
+
+comm_pedino <- with(pedino_subset, tapply(atom_13C_percent, list(Site_and_Panel, Species_ID), sum))
+comm_pedino <- ifelse(is.na(comm), 0, comm)
+head(comm_pedino)
+
+comm_pico <- with(pico_subset, tapply(atom_15N_percent, list(Site_and_Panel, Species_ID, sum)))
+comm_pico <- ifelse(is.na(comm), 0, comm)
+head(comm_pico)

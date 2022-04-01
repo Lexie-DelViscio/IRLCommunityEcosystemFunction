@@ -43,5 +43,11 @@ head(Long_community_panel)
 head(community_panel_data)
 
 
+# extra 
+# s.PIE
+# simpsons evenness index 
+# abundance by sites for each panel we can get a measurement of evenness
+# the measure of evenness can be plotted against the traits frannies is deriving from flow cyto
+
 # Now we will examine species abundance per site (group/subset each of the 1-4 panels into a site location)
 
