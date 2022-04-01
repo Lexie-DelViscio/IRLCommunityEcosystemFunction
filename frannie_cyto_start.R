@@ -73,11 +73,32 @@ matplot(t(pedinoSCD), type = "l")
 matplot(t(pedinoSMS), type = "l")
 matplot(t(pedinoWP), type = "l")
 matplot(t(pedinoControl), type = "l")
+legend("top right", as.character(nr), col = cols, cex = 0.5, lty = ltyp, ncol = 3)
+## do i need to skew data here? I feel like they are the most explanatory, even more than if timew was labeled 1-180 b/c they are simple.. but just need a legend for the lines
+install.packages(ggplot2)
+library(ggplot2)
+
+#Scatterplot using ggplot2
+
+#Regression using ggplot2
+## (would do this probably with 2 of the highest diversity/richness
+## and the control panel. compare 3 regressions, 3 R-squared values for ease.. need to talk to lexie
+
+
+##question -- how do i do a legend for the lines
 
 ##dpyr::pivot_to_long - this will allow for changing the time 
 ##add rate of change
 ##characterize community response at ecosystem - combine with panel data to see any strong species effect
-
 ## X label/axis is time intervals (1-12) rather than exact minute intervals
 
+install.packages("remotes")
+remotes::install_github("ctkremer/priceTools")
+library("priceTools")
+
+
+install.packages("tidyverse")
+library(tidyr)
+?pivot_longer_spec
+#spec <- time_values %>% build_longer_spec(cols = !time, names_to = "cell removal over time", values_to = "minutes 1-180")    
 
