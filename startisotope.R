@@ -211,9 +211,24 @@ by_Panel_Site_pairwise_13 = pairwise.price(x = by_Panel_Site, species = "Species
 by_Panel_Site_dist_13 = get.dist.mats(by_Panel_Site_pairwise_13)
 by_Panel_Site_pairwise_13 = drop_na(by_Panel_Site_pairwise_13)
 processed_by_site_13 = process.data.price(by_Panel_Site_pairwise_13)
-priceTools::leap.zig.price(processed_by_site_13)
+leap.zig.price(processed_by_site_13)
+
+head(isotope_data)
+
+# questions about wider
+pedino_subset <- isotope_data[c('Site_and_Panel',"Species_ID","pedino_13C_enrichment")]
+head(pedino_subset)
+class(pedino_subset$pedino_13C_enrichment[0])
 
 
 
+library(tidyr)
+# fish_encounters %>% pivot_wider(
+#   names_from = station, 
+#   values_from = seen,
+#   values_fill = 0
 
-    
+?pivot_wider
+vignette("pivot")
+
+?dbl
