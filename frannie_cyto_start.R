@@ -63,6 +63,16 @@ pedinoSCD = pedino_cytometry[c(19:21),]
 pedinoSMS = pedino_cytometry[c(22:23),]
 pedinoWP = pedino_cytometry[c(24:26),]
 pedinoControl = pedino_cytometry[c(28:30),]
+Pico_FC = pico_cytometry[c(2:4),]
+Pico_HD = pico_cytometry[c(5:7),]
+Pico_ID = pico_cytometry[c(8:9),]
+Pico_IRL3 = pico_cytometry[c(10:13),]
+Pico_MIM = pico_cytometry[c(14:15),]
+Pico_MO = pico_cytometry[c(16:18),]
+Pico_SCD = pico_cytometry[c(19:21),]
+Pico_SMS = pico_cytometry[c(22:23),]
+Pico_WP = pico_cytometry[c(24:26),]
+Pico_Control = pico_cytometry[c(28:30),]
 matplot(t(pedino_FC), type = "l")
 matplot(t(pedino_HI), type = "l")
 matplot(t(pedino_ID), type = "l")
@@ -74,11 +84,25 @@ matplot(t(pedinoSMS), type = "l")
 matplot(t(pedinoWP), type = "l")
 matplot(t(pedinoControl), type = "l")
 legend("top right", as.character(nr), col = cols, cex = 0.5, lty = ltyp, ncol = 3)
+matplot(t(Pico_FC), type = "l")
+matplot(t(Pico_HI), type = "l")
+matplot(t(Pico_ID), type = "l")
+matplot(t(Pico_IRL3), type = "l")
+matplot(t(Pico_MIM), type = "l")
+matplot(t(Pico_MO), type = "l")
+matplot(t(Pico_SCD), type = "l")
+matplot(t(Pico_SMS), type = "l")
+matplot(t(Pico_WP), type = "l")
+matplot(t(Pico_Control), type = "l")
 ## do i need to skew data here? I feel like they are the most explanatory, even more than if timew was labeled 1-180 b/c they are simple.. but just need a legend for the lines
 install.packages(ggplot2)
 library(ggplot2)
 
 #Scatterplot using ggplot2
+
+theme_set(theme_bw)
+smooth <- ggplot(data = pedino_cytometry, aes(x = time_values, y = Panels_Pedino))
+geom_point(aes(shape=Panels), size = 2.5) + xlab("Time Values 1-180 Minutes" + ylab("Panels"))
 
 #Regression using ggplot2
 ## (would do this probably with 2 of the highest diversity/richness
