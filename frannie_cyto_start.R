@@ -100,11 +100,18 @@ library(ggplot2)
 
 #Scatterplot using ggplot2
 
+
+SP<-ggplot(x = Pico_Control, aes(x=time_values, y=Panels, colour = "green")) + geom_point(aes(size = 2.5), alpha=0.7) + ggtitle("Pico Cell Removal on Control Panel over 180 Minute Time Frame")
+SP+ scale_color_gradient(low="blue", high="yellow")+ theme_bw()
+
+#ggsave( width = 10, height = 6, dpi = 300,"scatter_ggplot.png")
+
+
+#Regression using ggplot2
 theme_set(theme_bw)
 smooth <- ggplot(data = pedino_cytometry, aes(x = time_values, y = Panels_Pedino))
 geom_point(aes(shape=Panels), size = 2.5) + xlab("Time Values 1-180 Minutes" + ylab("Panels"))
 
-#Regression using ggplot2
 ## (would do this probably with 2 of the highest diversity/richness
 ## and the control panel. compare 3 regressions, 3 R-squared values for ease.. need to talk to lexie
 
@@ -116,6 +123,7 @@ geom_point(aes(shape=Panels), size = 2.5) + xlab("Time Values 1-180 Minutes" + y
 ##characterize community response at ecosystem - combine with panel data to see any strong species effect
 ## X label/axis is time intervals (1-12) rather than exact minute intervals
 
+#BEF - CAFE - need to use for flow_cyto? could use the temporal part of it
 install.packages("remotes")
 remotes::install_github("ctkremer/priceTools")
 library("priceTools")
@@ -124,5 +132,5 @@ library("priceTools")
 install.packages("tidyverse")
 library(tidyr)
 ?pivot_longer_spec
-#spec <- time_values %>% build_longer_spec(cols = !time, names_to = "cell removal over time", values_to = "minutes 1-180")    
+spec <- time_values %>% build_longer_spec(cols = !time, names_to = "cell removal over time", values_to = "minutes 1-180")    
 
