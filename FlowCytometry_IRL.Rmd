@@ -1,0 +1,119 @@
+---
+title: "Flow Cytometry Data Analysis"
+author: "Francesca Dellacqua"
+date: "4/4/2022"
+output: html_document
+---
+
+```{r setup, echo=FALSE}
+library(knitr)
+opts_knit$set(tidy=TRUE)
+```
+
+Flow Cytometry is a method used for detection of characteristics of cells. In this project specifically it was used to detect algal cell removal of a Picocyanobacteria (Pico) species and a Picochlorum species (Pedino). All algal cells were labelled with stable isotopes, 15N for picocyanobacteria and 13C for picochlorum. The flow cytometry experiment spanned from 0-180 minutes (3 hours), examining proportions of original cells to show this temporal removal. Panels were exposed to algal bloom species in order to test for this; both overall removal, and success of removal dependent on the panel. 
+
+```{r}
+install.packages("readxl")
+cytometry_file = read.xl("edited_community_experiment_data.xlsx",)
+head(cytometry_file)
+cytometry_file$Panel[1]
+
+pico_cytometry <- cytometry_file[ -c(0,14:25) ]
+pico_cytometry
+pedino_cytometry <- cytometry_file[ c(0,14:25) ]
+pedino_cytometry
+
+plot(Panel[1] ~ Pico5 + Pico10 + Pico15 + Pico20 + Pico30 + Pico40 + Pico50 + Pico60 + Pico90 + Pico120 + Pico150 + Pico180, data = cytometry_file)
+time_values = list(5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180)
+plot( time_values, cytometry_file[2,])
+
+Cell_Proportions <- Picocytometry_file[ c(0, 3:14)]
+boxplot(Cell_Proportions, xlab = 'Time Intervals', ylab = 'Average Cell Counts')
+library(readxl)
+edited_community_experiment_data <- read_excel("edited_community_experiment_data.xlsx", sheet = "Pico Cell Removal Flow CYTO")
+names(Picocytometry_file)
+Picocytometry_file$...1
+```
+
+Panels are labeled 1-25 in total as exact location has yet to play an important role in this overall analysis. 
+
+
+```{r}
+plot(Picocytometry_file$...1 ~ Picocytometry_file$`5`, xlab = 'Cell Proportions 5 Minutes', ylab = 'Panels')
+plot(Picocytometry_file$...1 ~ Picocytometry_file$`30`, xlab = 'Cell Proportions 30 Minutes', ylab = 'Panels')
+plot(Picocytometry_file$...1 ~ Picocytometry_file$`180`, xlab = 'Cell Proportions 180 Minutes', ylab = 'Panels')
+```
+Proportions of cells removed over several time intervals in Picocyanobacteria sp. 
+
+
+```{r}
+library(readxl)
+edited_community_experiment_data <- read_excel("edited_community_experiment_data.xlsx", sheet = "Pedino Cell Removal Flow CYTO")
+View(edited_community_experiment_data)  
+pedino_cytometry = edited_community_experiment_data <- read_excel("edited_community_experiment_data.xlsx", sheet = "Pedino Cell Removal Flow CYTO")
+Time = list(pedino_cytometry$`5`, pedino_cytometry$`10`, pedino_cytometry$`15`, pedino_cytometry$`20`, pedino_cytometry$`30`, pedino_cytometry$`40`, pedino_cytometry$`50`, pedino_cytometry$`60`, pedino_cytometry$`90`, pedino_cytometry$`120`, pedino_cytometry$`150`, pedino_cytometry$`180`)
+Cell_Proportions_Pedino <- pedino_cytometry[ c(0, 3:14)]
+boxplot(Cell_Proportions_Pedino, xlab = 'Time Intervals', ylab = 'Average Cell Counts')
+```
+Box plot examining enrichment of algal cells in panels over time for both species. It is clear there is significant algal cell removal, specifically within the first 50 minutes. 
+
+
+```{r}
+TimePico = list(pico_cytometry$Pico5, pico_cytometry$Pico10, pico_cytometry$Pico15, pico_cytometry$Pico20, pico_cytometry$Pico30, pico_cytometry$Pico40, pico_cytometry$Pico50, pico_cytometry$Pico60, pico_cytometry$Pico90, pico_cytometry$Pico120, pico_cytometry$Pico150, pico_cytometry$Pico180)
+head(TimePico)
+```
+
+```{r}
+pedino_FC = pedino_cytometry[c(2:4),]
+pedino_HI = pedino_cytometry[c(5:7),]
+pedino_ID = pedino_cytometry[c(8:9),]
+pedinoIRL3 = pedino_cytometry[c(10:13),]
+pedinoMIM = pedino_cytometry[c(14:15),]
+pedinoMO = pedino_cytometry[c(16:17),]
+pedinoMO = pedino_cytometry[c(16:18),]
+pedinoSCD = pedino_cytometry[c(19:21),]
+pedinoSMS = pedino_cytometry[c(22:23),]
+pedinoWP = pedino_cytometry[c(24:26),]
+pedinoControl = pedino_cytometry[c(28:30),]
+Pico_FC = pico_cytometry[c(2:4),]
+Pico_HD = pico_cytometry[c(5:7),]
+Pico_ID = pico_cytometry[c(8:9),]
+Pico_IRL3 = pico_cytometry[c(10:13),]
+Pico_MIM = pico_cytometry[c(14:15),]
+Pico_MO = pico_cytometry[c(16:18),]
+Pico_SCD = pico_cytometry[c(19:21),]
+Pico_SMS = pico_cytometry[c(22:23),]
+Pico_WP = pico_cytometry[c(24:26),]
+Pico_Control = pico_cytometry[c(28:30),]
+matplot(t(pedino_FC), type = "l")
+matplot(t(pedino_HI), type = "l")
+matplot(t(pedino_ID), type = "l")
+matplot(t(pedinoIRL3), type = "l")
+matplot(t(pedinoMIM), type = "l")
+matplot(t(pedinoMO), type = "l")
+matplot(t(pedinoSCD), type = "l")
+matplot(t(pedinoSMS), type = "l")
+matplot(t(pedinoWP), type = "l")
+matplot(t(pedinoControl), type = "l")
+matplot(t(Pico_FC), type = "l")
+matplot(t(Pico_HI), type = "l")
+matplot(t(Pico_ID), type = "l")
+matplot(t(Pico_IRL3), type = "l")
+matplot(t(Pico_MIM), type = "l")
+matplot(t(Pico_MO), type = "l")
+matplot(t(Pico_SCD), type = "l")
+matplot(t(Pico_SMS), type = "l")
+matplot(t(Pico_WP), type = "l")
+matplot(t(Pico_Control), type = "l")
+```
+
+Matplots among each species examine cell removal over time in each panel present at a site. Different lines represent the different panels and each graph shows removal per site, including those with the control panels. 
+
+```{r} 
+install.packages(ggplot2)
+library(ggplot2)
+```
+# This is a work in progress examining the three most species even/ species rich panels in comparison to the control panels with the flow cytometry data.A multivariate linear regression with slope values will be formed for the final deliverable. 
+
+
+
