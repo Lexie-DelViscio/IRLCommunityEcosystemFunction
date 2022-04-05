@@ -8,7 +8,7 @@ cytometry_file$Panel[1]
 
 pico_cytometry <- cytometry_file[ -c(0,14:25) ]
 pico_cytometry
-pedino_cytometry <- cytometry_file[ c(0,14:25) ]
+pedino_cytometry <- cytometry_file[ c(0,14:25) ] 
 pedino_cytometry
 
 plot(Panel[1] ~ Pico5 + Pico10 + Pico15 + Pico20 + Pico30 + Pico40 + Pico50 + Pico60 + Pico90 + Pico120 + Pico150 + Pico180, data = cytometry_file)
@@ -44,13 +44,14 @@ plot(Picocytometry_file$...1 ~ Picocytometry_file$`150`, xlab = 'Cell Proportion
 plot(Picocytometry_file$...1 ~ Picocytometry_file$`180`, xlab = 'Cell Proportions 180 Minutes', ylab = 'Panels')
 ## Exploratory models examing over each time interval  
 
+# having a hard time getting 
+
 library(readxl)
-edited_community_experiment_data <- read_excel("edited_community_experiment_data.xlsx", 
-                                               +     sheet = "Pedino Cell Removal Flow CYTO")
+edited_community_experiment_data <- read_excel("edited_community_experiment_data.xlsx", sheet="Pedino Cell Removal Flow CYTO")
 View(edited_community_experiment_data)  
 pedino_cytometry = edited_community_experiment_data <- read_excel("edited_community_experiment_data.xlsx", sheet = "Pedino Cell Removal Flow CYTO")
 Cell_Proportions_Pedino <- pedino_cytometry[ c(0, 3:14)]
-boxplot(Cell_Proportions_Pedino, xlab = 'Time Intervals', ylab = 'Average Cell Counts')
+boxplot(pedino_cytometry, xlab = 'Time Intervals', ylab = 'Average Cell Counts')
 
 pedino_FC = pedino_cytometry[c(2:4),]
 pedino_HI = pedino_cytometry[c(5:7),]
@@ -74,6 +75,6 @@ matplot(t(pedinoSMS), type = "l")
 matplot(t(pedinoWP), type = "l")
 matplot(t(pedinoControl), type = "l")
 
-##new file
-## test for fran pulling
+
+
 
