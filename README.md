@@ -16,9 +16,6 @@ This project was conducted by Drs. Chris Freeman, Dean Janiak, and Valerie Paul 
 ## Diversity response:
     -- Inverse Simpson's Diversity Index calculated among panels & correlated in linear regression with algal cell removal for Pico & Pedino.
     -- Significant positive correlation (R-squared = 0.47, 0.17) in both models showing higher diversity correlated directly with more algal cell removal. 
-    [Screen Shot 2022-04-04 at 23.24.00.pdf](https://github.com/Lexie-DelViscio/IRLCommunityEcosystemFunction/files/8414601/Screen.Shot.2022-04-04.at.23.24.00.pdf)
-[Screen Shot 2022-04-04 at 23.24.09.pdf](https://github.com/Lexie-DelViscio/IRLCommunityEcosystemFunction/files/8414602/Screen.Shot.2022-04-04.at.23.24.09.pdf)
-
     
 
 ## Community composition effects: 
