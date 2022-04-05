@@ -44,9 +44,13 @@ head(community_panel_data)
 
 # Now we will examine species abundance per site (group/subset each of the 1-4 panels into a site location)
 
+<<<<<<< HEAD
 # I will also investigate 
 # s.PIE
 # Simpsons evenness index 
 # abundance by sites for each panel we can get a measurement of evenness
 # the measure of evenness can be plotted against the traits frannies is deriving from flow cytometry in the end
+=======
+# Now we will examine species abundance per site (group/subset each of the 1-4 panels into a site location)
+>>>>>>> de2af81aad5f41157cf3cd46005ab0b0ca82e74c
 
