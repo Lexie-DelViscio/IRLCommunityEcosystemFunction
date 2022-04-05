@@ -1,0 +1,62 @@
+---
+title: "IRL_Lexie_Distribution"
+author: "Lexie DelViscio"
+date: "4/5/2022"
+output: html_document
+---
+
+```{r setup, echo=False}
+library(knitr)
+opts_knit$set(tidy=TRUE)
+```
+This is all extremely preliminary visualizations for panels and data organization
+
+loading libraries
+```{r}
+library("xlsx")
+library(vegan)
+library(dummies)
+library(tidyr)
+
+```
+
+
+```{r}
+community_panel_data <- read.xlsx("edited_community_experiment_data.xlsx",3)
+community_panel_data = subset(community_panel_data, select = -c(NA.))
+head(community_panel_data)
+```
+
+
+```{r}
+plot(community_panel_data$FC_01[which(community_panel_data$FC_01 > 0)])
+text(community_panel_data$FC_01[which(community_panel_data$FC_01 > 0)], labels=community_panel_data$Species[which(community_panel_data$FC_01 > 0)], cex=0.9, font=1)
+```
+
+```{r}
+plot(community_panel_data$FC_02[which(community_panel_data$FC_02 > 0)])
+text(community_panel_data$FC_02[which(community_panel_data$FC_02 > 0)], labels=community_panel_data$Species[which(community_panel_data$FC_02 > 0)], cex=0.9, font=1)
+```
+
+```{r}
+plot(community_panel_data$FC_03[which(community_panel_data$FC_03 > 0)])
+text(community_panel_data$FC_03[which(community_panel_data$FC_03 > 0)], labels=community_panel_data$Species[which(community_panel_data$FC_03 > 0)], cex=0.9, font=1)
+```
+
+```{r}
+plot(community_panel_data$FC_04[which(community_panel_data$FC_04 > 0)])
+text(community_panel_data$FC_04[which(community_panel_data$FC_04 > 0)], labels=community_panel_data$Species[which(community_panel_data$FC_04 > 0)], cex=0.9, font=1)
+```
+
+pivot the data longer
+```{r}
+Long_community_panel = community_panel_data %>%
+  pivot_longer(cols = c(FC_01, FC_02, FC_03, FC_04, HI_01, HI_02, HI_03, HI_04,ID_01, ID_03, IRL3_01, IRL3_02, IRL3_03, IRL3_04, MIM_01, MIM_02, MO_01, MO_02, MO_03, SCD_01,SCD_02, SCD_03, SMS_01, SMS_03, WP_01, WP_03, WP_04), names_to = c("Site"))
+head(Long_community_panel)
+```
+
+I will also investigate s.PIE, Or Simpsons evenness index as well as, the abundance by sites for each panel in order to get a measurement of evenness. The measure of evenness can be plotted against the traits frannies is deriving from flow cytometry in the end. 
+
+
+
+
