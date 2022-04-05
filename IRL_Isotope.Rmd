@@ -5,8 +5,9 @@ date: "4/4/2022"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+```{r setup, echo=FALSE}
+library(knitr)
+opts_knit$set(tidy=TRUE)
 ```
 
 ## R Markdown
@@ -236,14 +237,14 @@ isotope_copy$Species_ID <- fct_reorder(isotope_copy$Species_ID, isotope_copy$Tax
 
 Species versus Pedino Enrichment
 ```{r}
-ggplot(data = x) + 
+ggplot(data = isotope_copy) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment master') + theme(axis.text.x = element_text(angle = 90))
 ```
 
 Species versus Pico enrichment
 ```{r}
-ggplot(data = x) +
+ggplot(data = isotope_copy) +
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment master') + theme(axis.text.x = element_text(angle = 90))
 ```
