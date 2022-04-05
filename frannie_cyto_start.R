@@ -49,10 +49,14 @@ edited_community_experiment_data <- read_excel("edited_community_experiment_data
                                                +     sheet = "Pedino Cell Removal Flow CYTO")
 View(edited_community_experiment_data)  
 pedino_cytometry = edited_community_experiment_data <- read_excel("edited_community_experiment_data.xlsx", sheet = "Pedino Cell Removal Flow CYTO")
+Time = list(pedino_cytometry$`5`, pedino_cytometry$`10`, pedino_cytometry$`15`, pedino_cytometry$`20`, pedino_cytometry$`30`, pedino_cytometry$`40`, pedino_cytometry$`50`, pedino_cytometry$`60`, pedino_cytometry$`90`, pedino_cytometry$`120`, pedino_cytometry$`150`, pedino_cytometry$`180`)
 Cell_Proportions_Pedino <- pedino_cytometry[ c(0, 3:14)]
 boxplot(Cell_Proportions_Pedino, xlab = 'Time Intervals', ylab = 'Average Cell Counts')
+# OR boxplot(Time, Panels_Pedino, xlab = "Time Intervals 1-12", ylab = "Cell Proportions Pedino Among All Panels & Sites")
+TimePico = list(pico_cytometry$Pico5, pico_cytometry$Pico10, pico_cytometry$Pico15, pico_cytometry$Pico20, pico_cytometry$Pico30, pico_cytometry$Pico40, pico_cytometry$Pico50, pico_cytometry$Pico60, pico_cytometry$Pico90, pico_cytometry$Pico120, pico_cytometry$Pico150, pico_cytometry$Pico180)
+head(TimePico)
 
-pedino_FC = pedino_cytometry[c(2:4),]
+headpedino_FC = pedino_cytometry[c(2:4),]
 pedino_HI = pedino_cytometry[c(5:7),]
 pedino_ID = pedino_cytometry[c(8:9),]
 pedinoIRL3 = pedino_cytometry[c(10:13),]
@@ -98,12 +102,15 @@ matplot(t(Pico_Control), type = "l")
 install.packages(ggplot2)
 library(ggplot2)
 
+
+
+
 #Scatterplot using ggplot2
 
 
 SP<-ggplot(x = Pico_Control, aes(x=time_values, y=Panels, colour = "green")) + geom_point(aes(size = 2.5), alpha=0.7) + ggtitle("Pico Cell Removal on Control Panel over 180 Minute Time Frame")
-SP+ scale_color_gradient(low="blue", high="yellow")+ theme_bw()
-
+SP + scale_color_gradient(low="blue", high="yellow")+ theme_bw()
+ 
 #ggsave( width = 10, height = 6, dpi = 300,"scatter_ggplot.png")
 
 
@@ -128,9 +135,9 @@ install.packages("remotes")
 remotes::install_github("ctkremer/priceTools")
 library("priceTools")
 
-
 install.packages("tidyverse")
 library(tidyr)
 ?pivot_longer_spec
 spec <- time_values %>% build_longer_spec(cols = !time, names_to = "cell removal over time", values_to = "minutes 1-180")    
+
 
