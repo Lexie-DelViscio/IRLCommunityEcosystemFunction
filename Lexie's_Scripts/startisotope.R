@@ -323,7 +323,6 @@ sum(pedino_pca$CA$eig)
 
 round(pedino_pca$CA$eig / pedino_pca$tot.chi, 2)
 
-<<<<<<< HEAD
 # ordiplot examples
 # data(dune)
 # dune.dis <- vegdist(wisconsin(dune))
@@ -348,24 +347,6 @@ fig <- ordiplot(pedino_pca)
 text(fig,"species",col="red",cex=0.8)
 text(fig,"sites",col="blue",cex=0.8)
     
-=======
-<<<<<<< HEAD:startisotope.R
-#We can see from above that the PCA axis 1 captures approximately 17% of the total variance in the community matrix. Let's graph the data to better get a sense of the correlation structure.
-=======
-data(dune)
-dune.dis <- vegdist(wisconsin(dune))
-dune.mds <- cmdscale(dune.dis, eig = TRUE)
-dune.mds$species <- wascores(dune.mds$points, dune, expand = TRUE)
-fig <- ordiplot(dune.mds, type = "none")
-points(fig, "sites", pch=21, col="red", bg="yellow")
-text(fig, "species", col="blue", cex=0.9)
-
-
-fig <- ordiplot(pico_pca, display = c("species", "sites"))
-text(fig, "species", col="blue", cex=0.9)
-text(fig, "sites", col="red", cex=0.9)
-
-
 plot(pedino_pca)
 biplot(pedino_pca)
 
