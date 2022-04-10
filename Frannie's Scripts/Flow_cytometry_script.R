@@ -12,3 +12,4 @@ pedino_subset <- file[,c("Panel","Pedino5","Pedino10","Pedino15","Pedino20",
 head(pedino_subset)
 
 
+
