@@ -282,7 +282,6 @@ comm_pedino <- ifelse(is.na(comm_pedino), 0, comm_pedino)
 comm_pico <- with(pico_subset, tapply(pico_15N_enrichment, list(Site_and_Panel, Species_ID), sum))
 comm_pico <- ifelse(is.na(comm_pico), 0, comm_pico)
 
-head(comm_pico)
 ```
 
 pico pca
@@ -304,7 +303,6 @@ round(pico_pca$CA$eig / pico_pca$tot.chi, 2)
 ```
 
 ```{r}
-plot(pico_pca)
 biplot(pico_pca)
 ```
 
@@ -339,7 +337,6 @@ round(pedino_pca$CA$eig / pedino_pca$tot.chi, 2)
 ```
 
 ```{r}
-plot(pedino_pca)
 biplot(pedino_pca)
 ```
 
@@ -435,3 +432,4 @@ grid.arrange(SMS_02_bp1, SMS_02_bp2, nrow = 1)
 
 ```
 We can see that the four sites highly associated with the axis of variance are each composed of a variance of taxa, as well as indicator species amongst each that seem to be doing the most removal (becomming the most enriched). The key point here however is that these all are more diverse within their structure as can be seen in the different taxa presented, and they are more connected to the axis of variation in the pca analysis than the panel SMS_02 which is not associated with pca axis 1 or 2 more strongly and only has one species showing no diversity. 
+
