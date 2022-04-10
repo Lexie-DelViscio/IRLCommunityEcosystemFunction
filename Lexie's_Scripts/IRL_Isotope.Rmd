@@ -12,6 +12,7 @@ opts_knit$set(tidy=TRUE)
 
 ## R Markdown
 Lets start by loading in libraries we will need 
+Download instructions for PriceTools is in the scripts folder if not already installed
 ```{r}
 library("xlsx")
 library(ggplot2)
@@ -34,9 +35,9 @@ Simple visualization of the data
 head(isotope_data)
 unique(isotope_data$Taxa)
 ```
-The values contained in the columns pedino_13C_enrichment and pico_15N_enrichment represent FILL IN
+The values contained in the columns pedino_13C_enrichment and pico_15N_enrichment represent proxies for efficient removal and assimilation of nutrients from enriched Picochlorum sp (referred to as pedino throughout) and Picocyanobacteria (referred to as pico throughout)
 
-The values contained in the columns atom_13C_percent and atom_15N_percent represent FILL IN
+The values contained in the columns atom_13C_percent and atom_15N_percent represent another way to express "enrichment" in 13C that would be caused by consuming algae that have been labeled with 13C and in 15N that would be caused by consuming algae that have been labeled with 15N.
 
 Barplots of the Means across each column of interest for Taxa
 ```{r}
