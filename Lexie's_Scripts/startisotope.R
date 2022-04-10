@@ -1,44 +1,14 @@
----
-title: "IRL_Isotope"
-author: "Lexie DelViscio"
-date: "4/4/2022"
-output: html_document
----
+# start
 
-```{r setup, echo=FALSE}
-library(knitr)
-opts_knit$set(tidy=TRUE)
-```
 
-## R Markdown
-Lets start by loading in libraries we will need 
-```{r}
 library("xlsx")
-library(ggplot2)
-library(forcats)
-library(tidyr)
-library(dplyr)
-library(priceTools)
-library(vegan)
-library(dummies)
-```
-
-and the data we will be using. 
-```{r}
 isotope_data <- read.xlsx("edited_community_isotope_data.xlsx",2)
-```
-
-Simple visualization of the data
-```{r}
 head(isotope_data)
 unique(isotope_data$Taxa)
-```
-The values contained in the columns pedino_13C_enrichment and pico_15N_enrichment represent FILL IN
+?barplot
 
-The values contained in the columns atom_13C_percent and atom_15N_percent represent FILL IN
+table(isotope_data$Species_ID)
 
-Barplots of the Means across each column of interest for Taxa
-```{r}
 #barplots by taxa means
 par(mfrow=c(2,2))
 color_vector_taxa = rev(rainbow(length(unique(isotope_data$Taxa))))
@@ -51,10 +21,8 @@ mean_taxa_pico = tapply(isotope_data$pico_15N_enrichment, isotope_data$Taxa, mea
 mean_taxa_pico_percent = tapply(isotope_data$atom_15N_percent,isotope_data$Taxa, mean)
 barplot(mean_taxa_pico,las=2, col = color_vector_taxa, ylab = "Pico Enrichment (15N) Mean", main = "Pico Enrichment Mean vs. Taxa")
 barplot(mean_taxa_pico_percent, las=2, col = color_vector_taxa,ylab = "Pico Atom% (15N)", main = "Pico Atom% Mean vs. Taxa")
-```
 
-Barplots of the Means across variable each column for Site
-```{r}
+
 #barplots by site
 par(mfrow=c(2,2))
 color_vector_site = rev(terrain.colors(length(unique(isotope_data$Taxa))))
@@ -67,49 +35,69 @@ mean_site_pico = tapply(isotope_data$pico_15N_enrichment, isotope_data$Panel_Sit
 mean_site_pico_percent = tapply(isotope_data$atom_15N_percent,isotope_data$Panel_Site, mean)
 barplot(mean_site_pico,las=2, col = color_vector_site, ylab = "Pico Enrichment (15N) Mean", main = "Pico Enrichment Mean vs. Site")
 barplot(mean_site_pico_percent, las=2, col = color_vector_site,ylab = "Pico Atom% (15N) Mean", main = "Pico Atom% Mean vs. Site")
-```
-Now we will make some boxplots for Taxa and Enrichment
-```{r}
+
+
+
+library(ggplot2)
+#enrichment boxplots by taxa
 ggplot(data = isotope_data) + 
   geom_boxplot(mapping = aes(x = Taxa, y = pedino_13C_enrichment, color = Taxa)) +  
   labs(x = 'Taxa', y = 'pedino_13C_enrichment', title = 'taxa vs pedino_13C_enrichment') + theme(axis.text.x = element_text(angle = 90))
-
 ggplot(data = isotope_data) + 
-  geom_boxplot(mapping = aes(x = Taxa, y = pico_15N_enrichment, color = Taxa)) +  labs(x = 'Taxa', y = 'pico_15N_enrichment', title = 'taxa vs pico_15N_enrichment') + theme(axis.text.x = element_text(angle = 90))
-```
+  geom_boxplot(mapping = aes(x = Taxa, y = pico_15N_enrichment, color = Taxa)) +  
+  labs(x = 'Taxa', y = 'pico_15N_enrichment', title = 'taxa vs pico_15N_enrichment') + theme(axis.text.x = element_text(angle = 90))
 
-As well as boxplots for Taxa and Atom %
-```{r}
-#Pedino
+# atom% boxplots by taxa
 ggplot(data = isotope_data) + 
   geom_boxplot(mapping = aes(x = Taxa, y = atom_13C_percent, color = Taxa)) +  
   labs(x = 'Taxa', y = 'atom 13C %', title = 'taxa vs pedino 13C %') + theme(axis.text.x = element_text(angle = 90))
-
-#pico
 ggplot(data = isotope_data) + 
   geom_boxplot(mapping = aes(x = Taxa, y = atom_15N_percent, color = Taxa)) +  
   labs(x = 'Taxa', y = "atom 15N %", title = 'taxa vs pico 15N %') + theme(axis.text.x = element_text(angle = 90))
  
-```
+pedinotaxa = lm(isotope_data$pedino_13C_enrichment ~ -1 + isotope_data$Taxa)
+pedinosite = lm(isotope_data$pedino_13C_enrichment ~ -1 + isotope_data$Panel_Site)
 
-basic taxa linear regression pedino
-```{r}
-pedino_taxa_lm = lm(isotope_data$pedino_13C_enrichment ~ -1 + isotope_data$Taxa)
-summary(pedino_taxa_lm)
-```
+unique(isotope_data$Panel_Site)
+summary(pedinosite)
+summary(pedinotaxa)
 
-basic taxa linear regression pico
-```{r}
+pedinospecies = lm(isotope_data$pedino_13C_enrichment ~ isotope_data$Species_ID)
+summary(pedinospecies)
+
+
 pico_taxa_lm = lm(isotope_data$pico_15N_enrichment ~ -1 + isotope_data$Taxa)
+pico_site_lm = lm(isotope_data$pico_15N_enrichment ~ -1 + isotope_data$Panel_Site)
+
 summary(pico_taxa_lm)
-```
+summary(picosite)
+head(isotope_data)
+
+picospecies = lm(isotope_data$pico_15N_enrichment ~ -1 + isotope_data$Species_ID)
+
+length(unique(isotope_data$Species_ID))
+
+plot(table(isotope_data$Species_ID), las=2)
+summary(picospecies)
+
+# site and species lm not included in markdown
 
 
-Boxplots for enrichment by taxa mean- per panel
+#str(dune_mds)
 
-FC
-```{r}
+# subset analysis of all the isotope species 
+# species consistently showing small or weak dependency
+# deterministic vs stochastic 
+
+unique(isotope_data$Panel_Site)
+
+
+# enrichment by taxa mean per panel
+
+# subsets by Panel
 FC_isotope <- subset(isotope_data, isotope_data$Panel_Site == "FC")
+head(FC_isotope)
+length(unique(FC_isotope$Species_ID))
 ggplot(data = FC_isotope) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment FC') + theme(axis.text.x = element_text(angle = 90))
@@ -118,11 +106,10 @@ ggplot(data = FC_isotope) +
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment FC') + theme(axis.text.x = element_text(angle = 90))
 
-```
 
-HI
-```{r}
 HI_isotope <- subset(isotope_data, isotope_data$Panel_Site == "HI")
+head(HI_isotope)
+length(unique(HI_isotope$Species_ID))
 ggplot(data = HI_isotope) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment HI') + theme(axis.text.x = element_text(angle = 90))
@@ -131,11 +118,11 @@ ggplot(data = HI_isotope) +
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment HI') + theme(axis.text.x = element_text(angle = 90))
 
-```
 
-ID
-```{r}
+
 ID_isotope <- subset(isotope_data, isotope_data$Panel_Site == "ID")
+head(ID_isotope)
+length(unique(ID_isotope$Species_ID))
 ggplot(data = ID_isotope) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment ID') + theme(axis.text.x = element_text(angle = 90))
@@ -144,11 +131,11 @@ ggplot(data = ID_isotope) +
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment ID') + theme(axis.text.x = element_text(angle = 90))
 
-```
 
-IRL_3
-```{r}
+
 IRL3_isotope <- subset(isotope_data, isotope_data$Panel_Site == "IRL3")
+head(IRL3_isotope)
+length(unique(IRL3_isotope$Species_ID))
 ggplot(data = IRL3_isotope) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment IRL3') + theme(axis.text.x = element_text(angle = 90))
@@ -158,11 +145,10 @@ ggplot(data = IRL3_isotope) +
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment IRL3') + theme(axis.text.x = element_text(angle = 90))
 
 
-```
 
-MIM
-```{r}
 MIM_isotope <- subset(isotope_data, isotope_data$Panel_Site == "MIM")
+head(MIM_isotope)
+length(unique(MIM_isotope$Species_ID))
 ggplot(data = MIM_isotope) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment MIM') + theme(axis.text.x = element_text(angle = 90))
@@ -171,11 +157,11 @@ ggplot(data = MIM_isotope) +
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment MIM') + theme(axis.text.x = element_text(angle = 90))
 
-```
 
-MO2
-```{r}
+
 MO2_isotope <- subset(isotope_data, isotope_data$Panel_Site == "MO2")
+head(MO2_isotope)
+length(unique(MO2_isotope$Species_ID))
 ggplot(data = MO2_isotope) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment MO2') + theme(axis.text.x = element_text(angle = 90))
@@ -184,11 +170,11 @@ ggplot(data = MO2_isotope) +
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment MO2') + theme(axis.text.x = element_text(angle = 90))
 
-```
 
-SCD
-```{r}
+
 SCD_isotope <- subset(isotope_data, isotope_data$Panel_Site == "SCD")
+head(SCD_isotope)
+length(unique(SCD_isotope$Species_ID))
 ggplot(data = SCD_isotope) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment SCD') + theme(axis.text.x = element_text(angle = 90))
@@ -198,11 +184,10 @@ ggplot(data = SCD_isotope) +
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment SCD') + theme(axis.text.x = element_text(angle = 90))
 
 
-```
 
-SMS
-```{r}
 SMS_isotope <- subset(isotope_data, isotope_data$Panel_Site == "SMS")
+head(SMS_isotope)
+length(unique(SMS_isotope$Species_ID))
 ggplot(data = SMS_isotope) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment SMS') + theme(axis.text.x = element_text(angle = 90))
@@ -211,11 +196,11 @@ ggplot(data = SMS_isotope) +
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment SMS') + theme(axis.text.x = element_text(angle = 90))
 
-```
 
-WP
-```{r}
+
 WP_isotope <- subset(isotope_data, isotope_data$Panel_Site == "WP")
+head(WP_isotope)
+length(unique(WP_isotope$Species_ID))
 ggplot(data = WP_isotope) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment WP') + theme(axis.text.x = element_text(angle = 90))
@@ -224,107 +209,141 @@ ggplot(data = WP_isotope) +
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment WP') + theme(axis.text.x = element_text(angle = 90))
 
-```
+library(forcats)
+library(tidyr)
+?fct_reorder
 
+x <- isotope_data
+x$Species_ID <- factor(x$Species_ID)
+x$Species_ID <- fct_reorder(x$Species_ID, x$Taxa, .fun = max)
 
-Now we will create a dummy matrix (isotope_copy) in order to reorder the factor levels of Species ID by Taxa to graph a master plot of the Species and Enrichment values in an organized manner
+warnings()
 
-```{r}
-isotope_copy <- isotope_data
-isotope_copy$Species_ID <- factor(isotope_copy$Species_ID)
-isotope_copy$Species_ID <- fct_reorder(isotope_copy$Species_ID, isotope_copy$Taxa, .fun = max)
-```
+length(unique(x$Species_ID))
 
-Species versus Pedino Enrichment
-```{r}
-ggplot(data = isotope_copy) + 
+boxplot(pedino_13C_enrichment ~ Species_ID, data = x)
+
+ggplot(data = x) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment master') + theme(axis.text.x = element_text(angle = 90))
-```
 
-Species versus Pico enrichment
-```{r}
-ggplot(data = isotope_copy) +
+ggplot(data = x) +
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment master') + theme(axis.text.x = element_text(angle = 90))
-```
 
-subsetting the species of algae
-```{r}
+library(dplyr)
+top_ten_species = x%>% slice_max(x, 10)
+
+top_and_worst_ten
+library(tidyr)
+SMSandWP = subset(isotope_data, (isotope_data$Panel_Site == "SMS" | isotope_data == "WP"))
+SMSandWP = drop_na(data=SMSandWP)
+tail(SMSandWP)
+library(dplyr)
+SMSandWP_group_by <- SMSandWP %>% group_by(Panel_Site)
+SMSandWP_group_by
+by_Panel_Site <- isotope_data %>% group_by(Panel_Site)
+group_isotope
+
+# priceTools start-
+# ask Prof. about what we should be grouping by and what the function should be-
+
+library(priceTools)
+SMSandWP_pairwise_price = pairwise.price(x = SMSandWP_group_by, species = "Species_ID", func = "pedino_13C_enrichment")
+SMSandWP_dist = get.dist.mats(SMSandWP_pairwise_price)
+SMSandWP_pairwise_price = drop_na(SMSandWP_pairwise_price)
+
+processed_SMSandWP = process.data.price(SMSandWP_pairwise_price)
+priceTools::leap.zig.price(processed_SMSandWP)
+
+by_Panel_Site_pairwise_13 = pairwise.price(x = by_Panel_Site, species = "Species_ID", func = "pedino_13C_enrichment")
+by_Panel_Site_dist_13 = get.dist.mats(by_Panel_Site_pairwise_13)
+by_Panel_Site_pairwise_13 = drop_na(by_Panel_Site_pairwise_13)
+processed_by_site_13 = process.data.price(by_Panel_Site_pairwise_13)
+leap.zig.price(processed_by_site_13)
+
+head(isotope_data)
+isotope_data
+
+
 pedino_subset <- isotope_data[c('Site_and_Panel',"Species_ID","pedino_13C_enrichment","atom_13C_percent")]
 pico_subset <- isotope_data[c('Site_and_Panel',"Species_ID","pico_15N_enrichment", "atom_15N_percent")]
-```
 
-creating community matrixes
-```{r}
-comm_pedino <- with(pedino_subset, tapply(pedino_13C_enrichment, list(Site_and_Panel, Species_ID), sum))
+# fish_encounters %>% pivot_wider(
+#   names_from = station, 
+#   values_from = seen,
+#   values_fill = 0
+
+?pivot_wider
+vignette("pivot")
+
+?dbl
+
+# start indirect ordination analysis of species
+
+comm_pedino <- with(pedino_subset, tapply(atom_13C_percent, list(Site_and_Panel, Species_ID), sum))
 comm_pedino <- ifelse(is.na(comm_pedino), 0, comm_pedino)
 
 
-comm_pico <- with(pico_subset, tapply(pico_15N_enrichment, list(Site_and_Panel, Species_ID), sum))
+comm_pico <- with(pico_subset, tapply(atom_15N_percent, list(Site_and_Panel, Species_ID), sum))
 comm_pico <- ifelse(is.na(comm_pico), 0, comm_pico)
-```
 
-pico pca
-```{r}
+
+
+library(vegan)
+library(dummies)
+# pico_pca 
 pico_pca = rda(comm_pico, scale = TRUE)
 pico_pca
-```
-
-```{r}
+par(mfrow= c(1,1))
 # the eigenvalues sum up to equal the total interia (i.e., total variance in this case)
 sum(pico_pca$CA$eig)
-```
 
-```{r}
 # the ratio of the eigenvalue to the total variance is the amount of 
 # variance explained by each PCA axis
+
 round(pico_pca$CA$eig / pico_pca$tot.chi, 2)
+
 #We can see from above that the PCA axis 1 captures approximately 17% of the total variance in the community matrix. Let's graph the data to better get a sense of the correlation structure.
-```
 
-```{r}
-plot(pico_pca)
 biplot(pico_pca)
-```
 
-```{r}
 ordiplot(pico_pca, display = 'species')
 orditorp(pico_pca, display = 'species')
-```
 
-pedino pca
-```{r}
+
 pedino_pca = rda(comm_pedino, scale = TRUE)
 pedino_pca
-```
-
-```{r}
 par(mfrow= c(1,1))
 # the eigenvalues sum up to equal the total interia (i.e., total variance in this case)
 sum(pedino_pca$CA$eig)
-```
 
-```{r}
 # the ratio of the eigenvalue to the total variance is the amount of 
 # variance explained by each PCA axis
 
 round(pedino_pca$CA$eig / pedino_pca$tot.chi, 2)
 
-#We can see from above that the PCA axis 1 captures approximately 16% of the total variance in the community matrix. Let's graph the data to better get a sense of the correlation structure.
-```
+<<<<<<< HEAD:startisotope.R
+#We can see from above that the PCA axis 1 captures approximately 17% of the total variance in the community matrix. Let's graph the data to better get a sense of the correlation structure.
+=======
+data(dune)
+dune.dis <- vegdist(wisconsin(dune))
+dune.mds <- cmdscale(dune.dis, eig = TRUE)
+dune.mds$species <- wascores(dune.mds$points, dune, expand = TRUE)
+fig <- ordiplot(dune.mds, type = "none")
+points(fig, "sites", pch=21, col="red", bg="yellow")
+text(fig, "species", col="blue", cex=0.9)
 
-```{r}
+
+fig <- ordiplot(pico_pca, display = c("species", "sites"))
+text(fig, "species", col="blue", cex=0.9)
+text(fig, "sites", col="red", cex=0.9)
+
+>>>>>>> 74980ca4ebfcc4b4731dcabc8d3c3138b2145f14:Lexie's_Scripts/startisotope.R
+
 plot(pedino_pca)
 biplot(pedino_pca)
-```
 
-```{r}
 ordiplot(pedino_pca, display = 'species')
 orditorp(pedino_pca, display = 'species')
-```
-
-
-I still want to do more work with these community matrixes, specifically relating to the species that are doing the most removal, and when.
-
 
