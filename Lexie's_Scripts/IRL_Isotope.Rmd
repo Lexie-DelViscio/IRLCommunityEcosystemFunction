@@ -280,6 +280,8 @@ comm_pedino <- ifelse(is.na(comm_pedino), 0, comm_pedino)
 
 comm_pico <- with(pico_subset, tapply(pico_15N_enrichment, list(Site_and_Panel, Species_ID), sum))
 comm_pico <- ifelse(is.na(comm_pico), 0, comm_pico)
+
+head(comm_pico)
 ```
 
 pico pca
@@ -341,5 +343,6 @@ ordiplot(pedino_pca, display = 'species')
 orditorp(pedino_pca, display = 'species')
 ```
 I still want to do more work with these community matrixes, specifically relating to the species that are doing the most removal, and when.
+
 
 

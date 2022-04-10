@@ -213,6 +213,19 @@ by_Panel_Site_pairwise_13 = drop_na(by_Panel_Site_pairwise_13)
 processed_by_site_13 = process.data.price(by_Panel_Site_pairwise_13)
 priceTools::leap.zig.price(processed_by_site_13)
 
+data(dune)
+dune.dis <- vegdist(wisconsin(dune))
+dune.mds <- cmdscale(dune.dis, eig = TRUE)
+dune.mds$species <- wascores(dune.mds$points, dune, expand = TRUE)
+fig <- ordiplot(dune.mds, type = "none")
+points(fig, "sites", pch=21, col="red", bg="yellow")
+text(fig, "species", col="blue", cex=0.9)
+
+
+fig <- ordiplot(pico_pca, display = c("species", "sites"))
+text(fig, "species", col="blue", cex=0.9)
+text(fig, "sites", col="red", cex=0.9)
+
 
 
 
