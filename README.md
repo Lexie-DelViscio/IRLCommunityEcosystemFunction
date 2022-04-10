@@ -37,17 +37,25 @@ This project is broken down into three main pieces of analysis.
 The first of which being a FLow Cytometry analysis at the site and panel level. 
 FRANNIE ADD DESCRIPTION OF YOUR PIECES
 
-    -- The second portion of the project is an analysis of Isotopic Enrichment data at the species level as well as site and taxa as well in order to gain knowledge of diversity function and individual portfolio effects. 
+    -- The second portion of the project is an analysis of Isotopic Enrichment 
+    data at the species level as well as site and taxa as well in order to gain
+    knowledge of diversity function and individual portfolio effects. 
 
-    -- All of the Isotopic Analysis can be found in Lexie's Scripts and Lexie's Graphs folders. 
-    -- It is suggested to review all of the required libraries in the IRL_Isotope.Rmd and download any missing libraries prior to running the file. 
-    -- Specific instructions to download the PriceTools library can also be found in Lexie's Scripts (pending use of it in final project... only preliminary use as of yet)
+    -- All of the Isotopic Analysis can be found in Lexie's Scripts and Lexie's 
+    Graphs folders. 
+    -- It is suggested to review all of the required libraries in the 
+    IRL_Isotope.Rmd and download any missing libraries prior to running the file. 
+    -- Specific instructions to download the PriceTools library can also be found 
+    in Lexie's Scripts (pending use of it in final project... only preliminary 
+    use as of yet)
 
-    -- The third portion of this project is an analysis of the community panel compositions. 
-    This analysis can be found in Lexie's scripts as well as in ...... FRANNIE wherever u have any from the original panel data if u do
+    -- The third portion of this project is an analysis of the community panel 
+    compositions. This analysis can be found in Lexie's scripts as well as in 
+    ...... FRANNIE wherever u have any from the original panel data if u do
 
 ## note on data
-It has been requested we keep the data for this experiment confidential. If for peer review purposes you would like to request it please contact the repository owners.
+
+    -- It has been requested we keep the data for this experiment confidential. If for peer review purposes you would like to    request it please contact the repository owners.
     
 ## ACKNOWLEDGEMENTS:
 
