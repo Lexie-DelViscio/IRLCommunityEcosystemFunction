@@ -111,7 +111,8 @@ Matplots among each species examine cell removal over time in each panel present
 install.packages("ggplot2")
 library(ggplot2)
 ```
-# This is a work in progress examining the three most species even/ species rich panels in comparison to the control panels with the flow cytometry data.A multivariate linear regression with slope values will be formed for the final deliverable.
+# This is a work in progress examining the three most species even/ species rich panels in comparison to the control panels with the flow cytometry data.A multivariate linear regression with slope values will be formed for the final deliverable
+
 
 
 
