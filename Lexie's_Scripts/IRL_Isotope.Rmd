@@ -21,6 +21,7 @@ library(dplyr)
 library(priceTools)
 library(vegan)
 library(dummies)
+library(gridExtra)
 ```
 
 and the data we will be using. 
@@ -70,26 +71,29 @@ barplot(mean_site_pico_percent, las=2, col = color_vector_site,ylab = "Pico Atom
 ```
 Now we will make some boxplots for Taxa and Enrichment
 ```{r}
-ggplot(data = isotope_data) + 
+boxplot1 <- ggplot(data = isotope_data) + 
   geom_boxplot(mapping = aes(x = Taxa, y = pedino_13C_enrichment, color = Taxa)) +  
   labs(x = 'Taxa', y = 'pedino_13C_enrichment', title = 'taxa vs pedino_13C_enrichment') + theme(axis.text.x = element_text(angle = 90))
 
-ggplot(data = isotope_data) + 
+boxplot2 <- ggplot(data = isotope_data) + 
   geom_boxplot(mapping = aes(x = Taxa, y = pico_15N_enrichment, color = Taxa)) +  labs(x = 'Taxa', y = 'pico_15N_enrichment', title = 'taxa vs pico_15N_enrichment') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(boxplot1, boxplot2, nrow = 1)
 ```
 
 As well as boxplots for Taxa and Atom %
 ```{r}
 #Pedino
-ggplot(data = isotope_data) + 
+boxplot3 <- ggplot(data = isotope_data) + 
   geom_boxplot(mapping = aes(x = Taxa, y = atom_13C_percent, color = Taxa)) +  
   labs(x = 'Taxa', y = 'atom 13C %', title = 'taxa vs pedino 13C %') + theme(axis.text.x = element_text(angle = 90))
 
 #pico
-ggplot(data = isotope_data) + 
+boxplot4 <- ggplot(data = isotope_data) + 
   geom_boxplot(mapping = aes(x = Taxa, y = atom_15N_percent, color = Taxa)) +  
   labs(x = 'Taxa', y = "atom 15N %", title = 'taxa vs pico 15N %') + theme(axis.text.x = element_text(angle = 90))
  
+grid.arrange(boxplot3,boxplot4, nrow = 1)
 ```
 
 basic taxa linear regression pedino
@@ -103,129 +107,6 @@ basic taxa linear regression pico
 pico_taxa_lm = lm(isotope_data$pico_15N_enrichment ~ -1 + isotope_data$Taxa)
 summary(pico_taxa_lm)
 ```
-
-
-Boxplots for enrichment by taxa mean- per panel
-
-FC
-```{r}
-FC_isotope <- subset(isotope_data, isotope_data$Panel_Site == "FC")
-ggplot(data = FC_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment FC') + theme(axis.text.x = element_text(angle = 90))
-
-ggplot(data = FC_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment FC') + theme(axis.text.x = element_text(angle = 90))
-
-```
-
-HI
-```{r}
-HI_isotope <- subset(isotope_data, isotope_data$Panel_Site == "HI")
-ggplot(data = HI_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment HI') + theme(axis.text.x = element_text(angle = 90))
-
-ggplot(data = HI_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment HI') + theme(axis.text.x = element_text(angle = 90))
-
-```
-
-ID
-```{r}
-ID_isotope <- subset(isotope_data, isotope_data$Panel_Site == "ID")
-ggplot(data = ID_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment ID') + theme(axis.text.x = element_text(angle = 90))
-
-ggplot(data = ID_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment ID') + theme(axis.text.x = element_text(angle = 90))
-
-```
-
-IRL_3
-```{r}
-IRL3_isotope <- subset(isotope_data, isotope_data$Panel_Site == "IRL3")
-ggplot(data = IRL3_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment IRL3') + theme(axis.text.x = element_text(angle = 90))
-
-ggplot(data = IRL3_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment IRL3') + theme(axis.text.x = element_text(angle = 90))
-
-
-```
-
-MIM
-```{r}
-MIM_isotope <- subset(isotope_data, isotope_data$Panel_Site == "MIM")
-ggplot(data = MIM_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment MIM') + theme(axis.text.x = element_text(angle = 90))
-
-ggplot(data = MIM_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment MIM') + theme(axis.text.x = element_text(angle = 90))
-
-```
-
-MO2
-```{r}
-MO2_isotope <- subset(isotope_data, isotope_data$Panel_Site == "MO2")
-ggplot(data = MO2_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment MO2') + theme(axis.text.x = element_text(angle = 90))
-
-ggplot(data = MO2_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment MO2') + theme(axis.text.x = element_text(angle = 90))
-
-```
-
-SCD
-```{r}
-SCD_isotope <- subset(isotope_data, isotope_data$Panel_Site == "SCD")
-ggplot(data = SCD_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment SCD') + theme(axis.text.x = element_text(angle = 90))
-
-ggplot(data = SCD_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment SCD') + theme(axis.text.x = element_text(angle = 90))
-
-
-```
-
-SMS
-```{r}
-SMS_isotope <- subset(isotope_data, isotope_data$Panel_Site == "SMS")
-ggplot(data = SMS_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment SMS') + theme(axis.text.x = element_text(angle = 90))
-
-ggplot(data = SMS_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment SMS') + theme(axis.text.x = element_text(angle = 90))
-
-```
-
-WP
-```{r}
-WP_isotope <- subset(isotope_data, isotope_data$Panel_Site == "WP")
-ggplot(data = WP_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment WP') + theme(axis.text.x = element_text(angle = 90))
-
-ggplot(data = WP_isotope) + 
-  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
-  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment WP') + theme(axis.text.x = element_text(angle = 90))
-
-```
-
 
 Now we will create a dummy matrix (isotope_copy) in order to reorder the factor levels of Species ID by Taxa to graph a master plot of the Species and Enrichment values in an organized manner
 
@@ -247,6 +128,142 @@ Species versus Pico enrichment
 ggplot(data = isotope_copy) +
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment master') + theme(axis.text.x = element_text(angle = 90))
+```
+
+Boxplots for enrichment by taxa mean- per panel
+
+
+FC
+```{r}
+FC_isotope <- subset(isotope_copy, isotope_copy$Panel_Site == "FC")
+FC_bp1 <- ggplot(data = FC_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment FC') + theme(axis.text.x = element_text(angle = 90))
+
+FC_bp2 <- ggplot(data = FC_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment FC') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(FC_bp1,FC_bp2, nrow = 1)
+
+```
+
+HI
+```{r}
+HI_isotope <- subset(isotope_copy, isotope_copy$Panel_Site == "HI")
+HI_bp1 <- ggplot(data = HI_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment HI') + theme(axis.text.x = element_text(angle = 90))
+
+HI_bp2 <- ggplot(data = HI_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment HI') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(HI_bp1,HI_bp2, nrow = 1)
+
+```
+
+ID
+```{r}
+ID_isotope <- subset(isotope_copy, isotope_copy$Panel_Site == "ID")
+ID_bp1 <- ggplot(data = ID_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment ID') + theme(axis.text.x = element_text(angle = 90))
+
+ID_bp2 <- ggplot(data = ID_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment ID') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(ID_bp1,ID_bp2, nrow = 1)
+```
+
+IRL_3
+```{r}
+IRL3_isotope <- subset(isotope_copy, isotope_copy$Panel_Site == "IRL3")
+IRL3_bp1 <- ggplot(data = IRL3_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment IRL3') + theme(axis.text.x = element_text(angle = 90))
+
+IRL3_bp2 <- ggplot(data = IRL3_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment IRL3') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(IRL3_bp1,IRL3_bp2, nrow = 1)
+
+```
+
+MIM
+```{r}
+MIM_isotope <- subset(isotope_copy, isotope_copy$Panel_Site == "MIM")
+MIM_bp1 <- ggplot(data = MIM_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment MIM') + theme(axis.text.x = element_text(angle = 90))
+
+MIM_bp2 <- ggplot(data = MIM_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment MIM') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(MIM_bp1,MIM_bp2, nrow = 1)
+
+```
+
+MO2
+```{r}
+MO2_isotope <- subset(isotope_copy, isotope_copy$Panel_Site == "MO2")
+MO2_bp1 <- ggplot(data = MO2_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment MO2') + theme(axis.text.x = element_text(angle = 90))
+
+MO2_bp2 <- ggplot(data = MO2_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment MO2') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(MO2_bp1,MO2_bp2, nrow = 1)
+
+```
+
+SCD
+```{r}
+SCD_isotope <- subset(isotope_copy, isotope_copy$Panel_Site == "SCD")
+SCD_bp1 <- ggplot(data = SCD_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment SCD') + theme(axis.text.x = element_text(angle = 90))
+
+SCD_bp2 <- ggplot(data = SCD_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment SCD') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(SCD_bp1,SCD_bp2, nrow = 1)
+
+```
+
+SMS
+```{r}
+SMS_isotope <- subset(isotope_copy, isotope_copy$Panel_Site == "SMS")
+SMS_bp1 <- ggplot(data = SMS_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment SMS') + theme(axis.text.x = element_text(angle = 90))
+
+SMS_bp2 <- ggplot(data = SMS_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment SMS') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(SMS_bp1,SMS_bp2, nrow = 1)
+
+```
+
+WP
+```{r}
+WP_isotope <- subset(isotope_copy, isotope_copy$Panel_Site == "WP")
+WP_bp1 <- ggplot(data = WP_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment WP') + theme(axis.text.x = element_text(angle = 90))
+
+WP_bp2 <- ggplot(data = WP_isotope) + 
+  geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment WP') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(WP_bp1,WP_bp2, nrow = 1)
 ```
 
 subsetting the species of algae
