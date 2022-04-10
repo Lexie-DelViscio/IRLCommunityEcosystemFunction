@@ -365,7 +365,6 @@ fig <- ordiplot(pico_pca, display = c("species", "sites"))
 text(fig, "species", col="blue", cex=0.9)
 text(fig, "sites", col="red", cex=0.9)
 
->>>>>>> 74980ca4ebfcc4b4731dcabc8d3c3138b2145f14:Lexie's_Scripts/startisotope.R
 
 plot(pedino_pca)
 biplot(pedino_pca)
@@ -373,4 +372,4 @@ biplot(pedino_pca)
 ordiplot(pedino_pca, display = 'species')
 orditorp(pedino_pca, display = 'species')
 
->>>>>>> b2fe6c784998ce3cd6dc250f0abfd6ac5d739b4d
+
