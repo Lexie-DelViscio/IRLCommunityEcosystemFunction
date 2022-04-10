@@ -323,8 +323,6 @@ biplot(pedino_pca)
 ordiplot(pedino_pca, display = 'species')
 orditorp(pedino_pca, display = 'species')
 ```
-
-
 I still want to do more work with these community matrixes, specifically relating to the species that are doing the most removal, and when.
 
 
