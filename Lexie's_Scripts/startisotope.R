@@ -213,20 +213,27 @@ by_Panel_Site_pairwise_13 = drop_na(by_Panel_Site_pairwise_13)
 processed_by_site_13 = process.data.price(by_Panel_Site_pairwise_13)
 priceTools::leap.zig.price(processed_by_site_13)
 
-data(dune)
-dune.dis <- vegdist(wisconsin(dune))
-dune.mds <- cmdscale(dune.dis, eig = TRUE)
-dune.mds$species <- wascores(dune.mds$points, dune, expand = TRUE)
-fig <- ordiplot(dune.mds, type = "none")
-points(fig, "sites", pch=21, col="red", bg="yellow")
-text(fig, "species", col="blue", cex=0.9)
+# ordiplot examples
+# data(dune)
+# dune.dis <- vegdist(wisconsin(dune))
+# dune.mds <- cmdscale(dune.dis, eig = TRUE)
+# dune.mds$species <- wascores(dune.mds$points, dune, expand = TRUE)
+# fig <- ordiplot(dune.mds, type = "none")
+# points(fig, "sites", pch=21, col="red", bg="yellow")
+# text(fig, "species", col="blue", cex=0.9)
 
 
-fig <- ordiplot(pico_pca, display = c("species", "sites"))
-text(fig, "species", col="blue", cex=0.9)
-text(fig, "sites", col="red", cex=0.9)
+fig <- ordiplot(pico_pca,display = "species")
+fig2 <- ordiplot(pico_pca, display = "sites")
+fig3<- ordiplot(pico_pca)
+text(fig3, "species", col="blue", cex=0.9)
+text(fig3, "sites", col="red", cex=0.9)
 
 
-
-
+biplot(pico_pca, choices = c(1,2), type = c("text", "points"),xlim= c(-5.1,3))
+ordiplot(pedino_pca, display = 'species',type="text")
+ordiplot(pedino_pca,display = 'sites',type="text")
+fig <- ordiplot(pedino_pca)
+text(fig,"species",col="red",cex=0.8)
+text(fig,"sites",col="blue",cex=0.8)
     
