@@ -281,6 +281,7 @@ comm_pedino <- ifelse(is.na(comm_pedino), 0, comm_pedino)
 
 comm_pico <- with(pico_subset, tapply(pico_15N_enrichment, list(Site_and_Panel, Species_ID), sum))
 comm_pico <- ifelse(is.na(comm_pico), 0, comm_pico)
+head(comm_pico)
 
 ```
 
@@ -417,18 +418,18 @@ grid.arrange(FC_03_bp1,FC_03_bp2, nrow = 1)
 as compared to a site which was in the centeroid rather than associated along an axis in the pca SMS_02.
 
 ```{r}
-SMS_02_subset <- subset(isotope_copy, isotope_copy$Site_and_Panel == "SMS_02")
-head(SMS_02_subset)
+SCD_01_subset <- subset(isotope_copy, isotope_copy$Site_and_Panel == "SCD_01")
+head(SMS_03_subset)
 
-SMS_02_bp1 <- ggplot(data = SMS_02_subset) + 
+SCD_01_bp1 <- ggplot(data = SCD_01_subset) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pedino_13C_enrichment', title = 'species vs pedino_13C_enrichment WP') + theme(axis.text.x = element_text(angle = 90))
 
-SMS_02_bp2 <- ggplot(data = SMS_02_subset) + 
+SCD_01_bp2 <- ggplot(data = SCD_01_subset) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
   labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment WP') + theme(axis.text.x = element_text(angle = 90))
 
-grid.arrange(SMS_02_bp1, SMS_02_bp2, nrow = 1)
+grid.arrange(SCD_01_bp1, SCD_01_bp2, nrow = 1)
 
 ```
 We can see that the four sites highly associated with the axis of variance are each composed of a variance of taxa, as well as indicator species amongst each that seem to be doing the most removal (becomming the most enriched). The key point here however is that these all are more diverse within their structure as can be seen in the different taxa presented, and they are more connected to the axis of variation in the pca analysis than the panel SMS_02 which is not associated with pca axis 1 or 2 more strongly and only has one species showing no diversity. 
