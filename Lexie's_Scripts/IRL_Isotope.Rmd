@@ -308,9 +308,13 @@ biplot(pico_pca)
 ```
 
 ```{r}
-ordiplot(pico_pca, display = 'species')
-orditorp(pico_pca, display = 'species')
+ordiplot(pico_pca, display = 'species', type = "text")
+ordiplot(pico_pca,display="sites", type = "text")
+fig <- ordiplot(pico_pca)
+text(fig,"species",col="red",cex=.8)
+points(fig,"sites",col="blue",cex=0.8)
 ```
+ID_03, HI_04, ID_01, and FC_03 all seem to have strong correlations with either PC1 or PC2, and so are worth investigating closely in an individual panel analysis.  
 
 pedino pca
 ```{r}
@@ -339,10 +343,41 @@ biplot(pedino_pca)
 ```
 
 ```{r}
-ordiplot(pedino_pca, display = 'species')
-orditorp(pedino_pca, display = 'species')
+ordiplot(pedino_pca, display = 'species',type="text")
+ordiplot(pedino_pca,display = 'sites',type="text")
+fig <- ordiplot(pedino_pca)
+text(fig,"species",col="red",cex=0.8)
+points(fig,"sites",col="blue",cex=0.8)
 ```
 I still want to do more work with these community matrixes, specifically relating to the species that are doing the most removal, and when.
 
 
+ID_03, HI_04, ID_01, and FC_03 
+```{r}
+ID_03_subset <- subset(isotope_copy, isotope_copy$Site_and_Panel == "ID_03")
+head(ID_03_subset)
+
+geom_boxplot(mapping = aes(x = Species_ID, y = pico_15N_enrichment, color=Taxa)) +  
+  labs(x = 'species_id', y = 'pico_15N_enrichment', title = 'species vs pico_15N_enrichment MO2') + theme(axis.text.x = element_text(angle = 90))
+
+grid.arrange(MO2_bp1,MO2_bp2, nrow = 1)
+
+
+```
+```{r}
+HI_04_subset <- subset(isotope_copy, isotope_copy$Site_and_Panel == "HI_04")
+head(HI_04_subset)
+```
+
+
+```{r}
+ID_01_subset <- subset(isotope_copy, isotope_copy$Site_and_Panel == "ID_01")
+head(ID_01_subset)
+```
+
+
+```{r}
+FC_03_subset <- subset(isotope_copy, isotope_copy$Site_and_Panel == "FC_03")
+head(FC_03_subset)
+```
 
