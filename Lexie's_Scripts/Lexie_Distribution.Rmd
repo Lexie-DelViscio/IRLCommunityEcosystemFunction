@@ -63,19 +63,10 @@ I will also investigate s.PIE, Or Simpsons evenness index as well as, the abunda
 ```{r}
 comm_data <- with(Long_community_panel, tapply(value, list(Site, Species), as.integer))
 comm_data <- ifelse(is.na(comm_data), 0, comm_data)
-head(comm_data)
 ```
 
 ```{r}
-diversity(comm_data,"simpson")
-
+diversity_indexes <- diversity(comm_data,"simpson")
+diversity_indexes
 ```
-
-# extra 
-# s.PIE
-# simpsons evenness index 
-# abundance by sites for each panel we can get a measurement of evenness
-# the measure of evenness can be plotted against the traits frannies is deriving from flow cyto
-
-# Now we will examine species abundance per site (group/subset each of the 1-4 panels into a site location)
 

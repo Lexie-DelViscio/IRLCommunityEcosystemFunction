@@ -419,7 +419,7 @@ as compared to a site which was in the centeroid rather than associated along an
 
 ```{r}
 SCD_01_subset <- subset(isotope_copy, isotope_copy$Site_and_Panel == "SCD_01")
-head(SMS_03_subset)
+
 
 SCD_01_bp1 <- ggplot(data = SCD_01_subset) + 
   geom_boxplot(mapping = aes(x = Species_ID, y = pedino_13C_enrichment, color=Taxa)) +  
@@ -433,4 +433,46 @@ grid.arrange(SCD_01_bp1, SCD_01_bp2, nrow = 1)
 
 ```
 We can see that the four sites highly associated with the axis of variance are each composed of a variance of taxa, as well as indicator species amongst each that seem to be doing the most removal (becomming the most enriched). The key point here however is that these all are more diverse within their structure as can be seen in the different taxa presented, and they are more connected to the axis of variation in the pca analysis than the panel SMS_02 which is not associated with pca axis 1 or 2 more strongly and only has one species showing no diversity. 
+
+The above point is further proven by the simpsons evenness index values for each of the specified panels. 
+
+The strongly correlated sites all have a high simpsons diversity index
+ID_03
+.91
+HI_04
+.88
+ID_01
+.88
+FC_03
+.77
+
+The site with low correlation to the pca axis has a low simpsons diversity index
+SCD_01
+.15
+
+This shows that diversity does play an affect on isotope removal.
+
+
+Simpsons Diversity Index as calculated in Lexie_Distribution.Rmd
+    FC_01     FC_02     FC_03     FC_04     HI_01     HI_02     HI_03     HI_04     ID_01     ID_03   IRL3_01 
+0.7635243 0.2150518 0.7671967 0.2302145 0.4416106 0.7507244 0.5786848 0.8808834 0.8816872 0.9085950 0.7160000 
+  IRL3_02   IRL3_03   IRL3_04    MIM_01    MIM_02     MO_01     MO_02     MO_03    SCD_01    SCD_02    SCD_03 
+0.3076633 0.7300296 0.6043925 0.4428711 0.4349174 0.7611791 0.7485370 0.7399773 0.1477990 0.1817325 0.1973003 
+   SMS_01    SMS_03     WP_01     WP_03     WP_04 
+0.7237451 0.5920168 0.5646149 0.5330642 0.3648000 
+
+Investigating individual species showing strong(er) axis correlation
+
+
+```{r}
+
+species_1 <- subset(isotope_copy,subset = Species_ID == 'Halichondria cf magniconulosa')
+species_1
+
+
+```
+although only found on one panel, this species lined up most closely with the same axis as the panel it was found on. It also seems to be doing the most amount of removal in the panel. Since there is only one instance it of this species, and it is a panel with a high diversity 
+
+
+
 
