@@ -67,7 +67,7 @@ head(comm_data)
 ```
 
 ```{r}
-diversity(comm_data,"simpson")
-
+diversity_indexes <- diversity(comm_data,"simpson")
+diversity_indexes
 ```
 
