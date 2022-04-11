@@ -446,9 +446,11 @@ ID_01
 FC_03
 .77
 
-The site with low correlation to the pca axis has a low simpsons diveristy index
+The site with low correlation to the pca axis has a low simpsons diversity index
 SCD_01
 .15
+
+This shows that diversity does play an affect on isotope removal.
 
 
 Simpsons Diversity Index as calculated in Lexie_Distribution.Rmd
@@ -458,4 +460,19 @@ Simpsons Diversity Index as calculated in Lexie_Distribution.Rmd
 0.3076633 0.7300296 0.6043925 0.4428711 0.4349174 0.7611791 0.7485370 0.7399773 0.1477990 0.1817325 0.1973003 
    SMS_01    SMS_03     WP_01     WP_03     WP_04 
 0.7237451 0.5920168 0.5646149 0.5330642 0.3648000 
+
+Investigating individual species showing strong(er) axis correlation
+
+
+```{r}
+
+species_1 <- subset(isotope_copy,subset = Species_ID == 'Halichondria cf magniconulosa')
+species_1
+
+
+```
+although only found on one panel, this species lined up most closely with the same axis as the panel it was found on. It also seems to be doing the most amount of removal in the panel. Since there is only one instance it of this species, and it is a panel with a high diversity 
+
+
+
 

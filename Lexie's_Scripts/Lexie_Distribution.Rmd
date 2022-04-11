@@ -63,7 +63,6 @@ I will also investigate s.PIE, Or Simpsons evenness index as well as, the abunda
 ```{r}
 comm_data <- with(Long_community_panel, tapply(value, list(Site, Species), as.integer))
 comm_data <- ifelse(is.na(comm_data), 0, comm_data)
-head(comm_data)
 ```
 
 ```{r}
