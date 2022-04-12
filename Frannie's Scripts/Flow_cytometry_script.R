@@ -26,6 +26,10 @@ colnames(comm_pedino_data)
 plot(comm_pedino_data$FC_01)
 
 comm_pedino_data<- as.data.frame(comm_pedino_data)
+my_factor <- factor(sample(c('Pedino10', 'Pedino120', 'Pedino15', 'Pedino150', 'Pedino180', 'Pedino20', 'Pedino30', 'Pedino40', 'Pedino5', 'Pedino50', 'Pedino60', 'Pedino90'), size = 12, replace = T))
+my_factor
+my_factor <- factor(my_factor, levels = c('Pedino5', 'Pedino10', 'Pedino15', 'Pedino20', 'Pedino30', 'Pedino40', 'Pedino50', 'Pedino60', 'Pedino90', 'Pedino120', 'Pedino150', 'Pedino180'))
+my_factor
 comm_pedino_data
 
 mydf <- cbind(rownames(comm_pedino_data),comm_pedino_data)
@@ -34,13 +38,9 @@ colnames(mydf) <- c(names(mydf)) #to not write all the column names
 
 colnames(mydf)[1] <- "Time" 
 names(mydf)
-my_factor <- factor(sample(c('Pedino10', 'Pedino120', 'Pedino15', 'Pedino150', 'Pedino180', 'Pedino20', 'Pedino30', 'Pedino40', 'Pedino5', 'Pedino50', 'Pedino60', 'Pedino90'), size = 12, replace = T))
-my_factor
-my_factor <- factor(my_factor, levels = c('Pedino5', 'Pedino10', 'Pedino15', 'Pedino20', 'Pedino30', 'Pedino40', 'Pedino50', 'Pedino60', 'Pedino90', 'Pedino120', 'Pedino150', 'Pedino180'))
-my_factor
 
 mydf
 
-ggplot(data=mydf, aes(x=Time, group = 1)) +
+ggplot(data=mydf, aes(x=my_factor, group = 1)) +
   geom_line(aes(y=FC_01))
 
