@@ -471,7 +471,7 @@ species_1
 
 
 ```
-although only found on one panel, this species lined up most closely with the same axis as the panel it was found on. It also seems to be doing the most amount of removal in the panel. Since there is only one instance it of this species, and it is a panel with a high diversity 
+although only found on one panel, this species lined up most closely with the same axis as the panel it was found on. It also seems to be doing the most amount of removal in the panel. Since there is only one instance of this species, and it is a panel with a high diversity it is hard to tell wheter this species would change the outcomes of other panels if it was present. 
 
 
 
