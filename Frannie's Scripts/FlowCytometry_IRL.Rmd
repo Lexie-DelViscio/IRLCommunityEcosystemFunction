@@ -10,7 +10,7 @@ library(knitr)
 opts_knit$set(tidy=TRUE)
 ```
 
-Flow Cytometry is a method used for detection of characteristics of cells. In this project specifically it was used to detect algal cell removal of a Picocyanobacteria (Pico) species and a Picochlorum species (Pedino). All algal cells were labelled with stable isotopes, 15N for picocyanobacteria and 13C for picochlorum. The flow cytometry experiment spanned from 0-180 minutes (3 hours), examining proportions of original cells to show this temporal removal. Panels were exposed to algal bloom species in order to test for this; both overall removal, and success of removal dependent on the panel. 
+Flow Cytometry is a method used for detection of characteristics of cells. In this project specifically it was used to detect algal cell removal of a Picocyanobacteria (Pico) species and a Picochlorum species (Pedino). All algal cells were labelled with stable isotopes, 15N for Picocyanobacteria and 13C for Picochlorum (Pedinophyte). The flow cytometry experiment spanned from 0-180 minutes (3 hours), examining proportions of original cells removed to show efficiency of suspension feeder consumption on each panel. Several models below observe which exposed panels were experiencing higher rates of algal cell removal, Simpson's diversity index as an indicator of cell removal efficiency, and overall change in cell proportions. 
 
 ```{r}
 install.packages("readxl")
@@ -19,100 +19,171 @@ head(cytometry_file)
 cytometry_file$Panel[1]
 ```
 
-```{r}
-pico_cytometry <- cytometry_file[ -c(0,14:25) ]
-pico_cytometry
-pedino_cytometry <- cytometry_file[ c(0,14:25) ]
-pedino_cytometry
-
-Cell_Proportions <- Picocytometry_file[ c(0, 3:14)]
-boxplot(Cell_Proportions, xlab = 'Time Intervals', ylab = 'Average Cell Counts')
-library(readxl)
-edited_community_experiment_data <- read_excel("edited_community_experiment_data.xlsx", sheet = "Pico Cell Removal Flow CYTO")
-names(Picocytometry_file)
-Picocytometry_file$...1
-```
-
-Panels are labeled 1-25 in total as exact location has yet to play an important role in this overall analysis. 
-
 
 ```{r}
-plot(Picocytometry_file$...1 ~ Picocytometry_file$`5`, xlab = 'Cell Proportions 5 Minutes', ylab = 'Panels')
-plot(Picocytometry_file$...1 ~ Picocytometry_file$`30`, xlab = 'Cell Proportions 30 Minutes', ylab = 'Panels')
-plot(Picocytometry_file$...1 ~ Picocytometry_file$`180`, xlab = 'Cell Proportions 180 Minutes', ylab = 'Panels')
-```
-Proportions of cells removed over several time intervals in Picocyanobacteria sp. 
+file <- read.csv("Frannie's Scripts/edited_community_experiment_data.csv")
+file
+file <- na.omit(file)
+file
 
-
-```{r}
-library(readxl)
-edited_community_experiment_data <- read_excel("edited_community_experiment_data.xlsx", sheet = "Pedino Cell Removal Flow CYTO")
-View(edited_community_experiment_data)  
-pedino_cytometry = edited_community_experiment_data <- read_excel("edited_community_experiment_data.xlsx", sheet = "Pedino Cell Removal Flow CYTO")
-Time = list(pedino_cytometry$`5`, pedino_cytometry$`10`, pedino_cytometry$`15`, pedino_cytometry$`20`, pedino_cytometry$`30`, pedino_cytometry$`40`, pedino_cytometry$`50`, pedino_cytometry$`60`, pedino_cytometry$`90`, pedino_cytometry$`120`, pedino_cytometry$`150`, pedino_cytometry$`180`)
-Cell_Proportions_Pedino <- pedino_cytometry[ c(0, 3:14)]
-boxplot(Cell_Proportions_Pedino, xlab = 'Time Intervals', ylab = 'Average Cell Counts')
-```
-Box plot examining enrichment of algal cells in panels over time for both species. It is clear there is significant algal cell removal, specifically within the first 50 minutes. 
-
-
-```{r}
-TimePico = list(pico_cytometry$Pico5, pico_cytometry$Pico10, pico_cytometry$Pico15, pico_cytometry$Pico20, pico_cytometry$Pico30, pico_cytometry$Pico40, pico_cytometry$Pico50, pico_cytometry$Pico60, pico_cytometry$Pico90, pico_cytometry$Pico120, pico_cytometry$Pico150, pico_cytometry$Pico180)
-head(TimePico)
-```
-
-```{r}
-pedino_FC = pedino_cytometry[c(2:4),]
-pedino_HI = pedino_cytometry[c(5:7),]
-pedino_ID = pedino_cytometry[c(8:9),]
-pedinoIRL3 = pedino_cytometry[c(10:13),]
-pedinoMIM = pedino_cytometry[c(14:15),]
-pedinoMO = pedino_cytometry[c(16:17),]
-pedinoMO = pedino_cytometry[c(16:18),]
-pedinoSCD = pedino_cytometry[c(19:21),]
-pedinoSMS = pedino_cytometry[c(22:23),]
-pedinoWP = pedino_cytometry[c(24:26),]
-pedinoControl = pedino_cytometry[c(28:30),]
-Pico_FC = pico_cytometry[c(2:4),]
-Pico_HD = pico_cytometry[c(5:7),]
-Pico_ID = pico_cytometry[c(8:9),]
-Pico_IRL3 = pico_cytometry[c(10:13),]
-Pico_MIM = pico_cytometry[c(14:15),]
-Pico_MO = pico_cytometry[c(16:18),]
-Pico_SCD = pico_cytometry[c(19:21),]
-Pico_SMS = pico_cytometry[c(22:23),]
-Pico_WP = pico_cytometry[c(24:26),]
-Pico_Control = pico_cytometry[c(28:30),]
-matplot(t(pedino_FC), type = "l")
-matplot(t(pedino_HI), type = "l")
-matplot(t(pedino_ID), type = "l")
-matplot(t(pedinoIRL3), type = "l")
-matplot(t(pedinoMIM), type = "l")
-matplot(t(pedinoMO), type = "l")
-matplot(t(pedinoSCD), type = "l")
-matplot(t(pedinoSMS), type = "l")
-matplot(t(pedinoWP), type = "l")
-matplot(t(pedinoControl), type = "l")
-matplot(t(Pico_FC), type = "l")
-matplot(t(Pico_HD), type = "l")
-matplot(t(Pico_ID), type = "l")
-matplot(t(Pico_IRL3), type = "l")
-matplot(t(Pico_MIM), type = "l")
-matplot(t(Pico_MO), type = "l")
-matplot(t(Pico_SCD), type = "l")
-matplot(t(Pico_SMS), type = "l")
-matplot(t(Pico_WP), type = "l")
-matplot(t(Pico_Control), type = "l")
-```
-
-Matplots among each species examine cell removal over time in each panel present at a site. Different lines represent the different panels and each graph shows removal per site, including those with the control panels. 
-
-```{r} 
-install.packages("ggplot2")
+library(tidyr)
 library(ggplot2)
-```
-# This is a work in progress examining the three most species even/ species rich panels in comparison to the control panels with the flow cytometry data.A multivariate linear regression with slope values will be formed for the final deliverable
 
+pico_subset <- file[,c("Panel","Pico5","Pico10","Pico15","Pico20",
+                       "Pico30","Pico40","Pico50","Pico60","Pico90","Pico120","Pico150","Pico180")]
+head(pico_subset)
+
+pedino_subset <- file[,c("Panel","Pedino5","Pedino10","Pedino15","Pedino20",
+                       "Pedino30","Pedino40","Pedino50","Pedino60","Pedino90","Pedino120","Pedino150","Pedino180")]
+head(pedino_subset)
+
+Long_pedino = pedino_subset %>%
+  pivot_longer(cols = c("Pedino5","Pedino10","Pedino15","Pedino20",
+               "Pedino30","Pedino40","Pedino50","Pedino60","Pedino90","Pedino120","Pedino150","Pedino180"), names_to = c("Time"))
+
+head(Long_pedino)
+
+comm_pedino_data <- with(Long_pedino, tapply(value, list(Time, Panel), as.integer))
+comm_pedino_data <- ifelse(is.na(comm_pedino_data), 0, comm_pedino_data)
+class(comm_pedino_data)
+colnames(comm_pedino_data)
+comm_pedino_data
+comm_pedino_data<- as.data.frame(comm_pedino_data)
+comm_pedino_data
+
+
+comm_pedino_data
+
+mydf <- cbind(rownames(comm_pedino_data),comm_pedino_data)
+rownames(mydf) <- NULL
+colnames(mydf) <- c(names(mydf)) 
+colnames(mydf)[1] <- "Time" 
+class(mydf$Time)
+mydf$Time <- factor(mydf$Time)
+class(mydf$Time)
+mydf$Time <- factor(mydf$Time, levels = c('Pedino5', 'Pedino10', 'Pedino15', 'Pedino20', 'Pedino30', 'Pedino40', 'Pedino50', 'Pedino60', 'Pedino90', 'Pedino120', 'Pedino150', 'Pedino180'))
+```
+
+## Pedinophyte Cell Removal Linear Models:
+
+# Low diversity score - SCD_01, FC_02, IRL3_02, 
+# High diversity scores- ID_03, HI_04, and FC_03
+# Control- control 1, control 2, control 3
+
+
+# Low diversity index panels
+```{r}
+ggplot(data=mydf) +
+  geom_line(aes(x = Time, y=SCD_01, color= "SCD_01",group = 1))+geom_label(aes(x=12,y=50,label="0.14"), fill="white")+
+  geom_line(aes(x = Time, y=FC_02, color = "FC_02", group = 1))+geom_label(aes(x=10,y=78,label="0.21"), fill="white")+
+  geom_line(aes(x = Time, y=IRL3_02, color= "IRL3_02",group = 1))+geom_label(aes(x=12,y=80,label="0.3"), fill="white")+
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
+```
+
+# High diversity index panels
+```{r}
+ggplot(data=mydf) +
+  geom_line(aes(x = Time, y=ID_03, color= "ID_03",group = 1))+
+  geom_line(aes(x = Time, y=HI_04, color = "HI_04", group = 1))+
+  geom_line(aes(x = Time, y=FC_03, color= "FC_03",group = 1))+ 
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
+```
+
+# Control Panel cell removal
+```{r}
+ggplot(data=mydf) +
+  geom_line(aes(x = Time, y=`Control 1`, color= "Control 1",group = 1))+
+  geom_line(aes(x = Time, y=`Control 2`, color = "Control 2", group = 1))+
+  geom_line(aes(x = Time, y=`Control 3`, color= "Control 3",group = 1))+
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
+```
+
+# High diversity (ID_03), Low diversity (SCD_01), & Control 1 Panels For Pedinophyte Cell Removal - ID_03 and SCD_01 are labelled with their calculated Simpson's Diversity Index on the representative line within the model. 
+```{r}
+ggplot(data=mydf) +
+  geom_line(aes(x = Time, y=ID_03, color= "ID_03",group = 1))+geom_label(aes(x=12,y=100,label="0.908"), fill="white")+
+  geom_line(aes(x = Time, y=SCD_01, color = "SCD_01", group = 1))+geom_label(aes(x=12,y=55,label="0.147"), fill="white")+
+  geom_line(aes(x = Time, y=`Control 1`, color= "Control 1",group = 1))+ 
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
+```  
+  
+# Pivoting and subsetting Picocyanobacteria data for linear modelling
+```{r}
+Long_Pico = pico_subset %>% 
+  pivot_longer(cols = c("Pico5","Pico10","Pico15","Pico20","Pico30","Pico40","Pico50","Pico60","Pico90","Pico120","Pico150","Pico180"), names_to = c("Time"))
+head(Long_Pico)
+
+
+comm_pico_data <- with(Long_Pico, tapply(value, list(Time, Panel), as.integer))
+comm_pico_data <- ifelse(is.na(comm_pico_data), 0, comm_pico_data)
+class(comm_pico_data)
+colnames(comm_pico_data)
+comm_pico_data
+comm_pico_data<- as.data.frame(comm_pico_data)
+comm_pico_data
+
+mydf2 <- cbind(rownames(comm_pico_data),comm_pico_data)
+rownames(mydf2) <- NULL
+colnames(mydf2) <- c(names(mydf2)) 
+colnames(mydf2)[1] <- "Time" 
+class(mydf2$Time)
+mydf2$Time <- factor(mydf2$Time)
+class(mydf2$Time)
+mydf2$Time <- factor(mydf2$Time, levels = c('Pico5', 'Pico10', 'Pico15', 'Pico20', 'Pico30', 'Pico40', 'Pico50', 'Pico60', 'Pico90', 'Pico120', 'Pico150', 'Pico180'))
+```
+
+
+## Picocyanobacteria Cell Removal Linear Models
+
+```{r}
+ggplot(data=mydf2) +
+  geom_line(aes(x = Time, y=SCD_01, color= "SCD_01",group = 1))+
+  geom_line(aes(x = Time, y=FC_02, color = "FC_02", group = 1))+
+  geom_line(aes(x = Time, y=IRL3_02, color= "IRL3_02",group = 1))+
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Picocyanobacteria cells removed (/mL)")
+
+
+ggplot(data=mydf2) +
+  geom_line(aes(x = Time, y=ID_03, color= "ID_03",group = 1))+ geom_label(aes(x=12,y=100,label="0.9"), fill="white")+
+  geom_line(aes(x = Time, y=HI_04, color = "HI_04", group = 1))+ geom_label(aes(x=11,y=89,label="0.88"),fill="white")+
+  geom_line(aes(x = Time, y=FC_03, color= "FC_03",group = 1))+ geom_label(aes(x=11,y=50,label="0.76"),fill="white")+
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Picocyanobacteria cells removed (/mL)")
+
+
+ggplot(data=mydf2) +
+  geom_line(aes(x = Time, y=`Control 1`, color= "Control 1",group = 1))+
+  geom_line(aes(x = Time, y=`Control 2`, color = "Control 2", group = 1))+
+  geom_line(aes(x = Time, y=`Control 3`, color= "Control 3", group = 1, ))+
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Picocyanobacteria cells removed (/mL)")
+
+
+ggplot(data=mydf2) +
+  geom_line(aes(x = Time, y=ID_03, color= "ID_03",group = 1))+geom_label(aes(x=11.5,y=94,label="0.908"), fill="white")+
+  geom_line(aes(x = Time, y=SCD_01, color = "SCD_01", group = 1))+geom_label(aes(x=12,y=30,label="0.147"), fill="white")+
+  geom_line(aes(x = Time, y=`Control 1`, color= "Control 1",group = 1))+ 
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Picocyanobacteria cells removed (/mL)")
+
+coef(lm(mydf2$`Control 1` ~ mydf2$Time))
+
+```
+
+# The last linear regression comparisons for both species of algal cell removal show that the panels with a higher diversity index are experiencing higher efficiency of removal, and the lower diversity panels are having less efficient removal with still more than in the control panels. This data is conducive with hypotheses that an ecosystem with higher biodiversity (calculated in this study using Simpson's Diversity Index) can serve ecosystem services such as mitigation of harmful algal blooms in prone areas. Simpson's Diversity Index takes species evenness, richness, overall count, and relative abundance. 
 
 
 
