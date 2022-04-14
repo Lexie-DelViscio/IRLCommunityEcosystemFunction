@@ -34,7 +34,7 @@ comm_pedino_data
 
 mydf <- cbind(rownames(comm_pedino_data),comm_pedino_data)
 rownames(mydf) <- NULL
-colnames(mydf) <- c(names(mydf)) #to not write all the column names
+colnames(mydf) <- c(names(mydf)) 
 colnames(mydf)[1] <- "Time" 
 class(mydf$Time)
 mydf$Time <- factor(mydf$Time)
@@ -49,7 +49,7 @@ ggplot(data=mydf) +
   geom_line(aes(x = Time, y=IRL3_02, color= "IRL3_02",group = 1))+
   ylim(NA,100)+
   xlab("Time (minutes)")+
-  ylab("Proportion of Original Pedinophtye cells removed (add units)")
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
 
 
 # High
@@ -59,7 +59,7 @@ ggplot(data=mydf) +
   geom_line(aes(x = Time, y=FC_03, color= "FC_03",group = 1))+ 
   ylim(NA,100)+
   xlab("Time (minutes)")+
-  ylab("Proportion of Original Pedinophtye cells removed (add units)")
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
 
 # control
 ggplot(data=mydf) +
@@ -68,7 +68,7 @@ ggplot(data=mydf) +
   geom_line(aes(x = Time, y=`Control 3`, color= "Control 3",group = 1))+
   ylim(NA,100)+
   xlab("Time (minutes)")+
-  ylab("Proportion of Original Pedinophtye cells removed (add units)")
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
 
 
 # hi hi low low and control 
@@ -78,7 +78,7 @@ ggplot(data=mydf) +
   geom_line(aes(x = Time, y=`Control 1`, color= "Control 1",group = 1))+ 
   ylim(NA,100)+
   xlab("Time (minutes)")+
-  ylab("Proportion of Original Pedinophtye cells removed (add units)")
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
 
 
 
@@ -90,8 +90,45 @@ summary(lm(mydf$ID_03~ -1 + mydf$Time))
 # low diversity score - SCD_01, FC_02, IRL3_02, 
 # high diversity scores- ID_03, HI_04, and FC_03
 # control- control 1, control 2, control 3, 
+  
+  
+Long_Pico = pico_subset %>% 
+  pivot_longer(cols = c("Pico5","Pico10","Pico15","Pico20","Pico30","Pico40","Pico50","Pico60","Pico90","Pico120","Pico150","Pico180"), names_to = c("Time"))
+head(Long_Pico)
 
 
+comm_pico_data <- with(Long_Pico, tapply(value, list(Time, Panel), as.integer))
+comm_pico_data <- ifelse(is.na(comm_pico_data), 0, comm_pico_data)
+class(comm_pico_data)
+colnames(comm_pico_data)
+comm_pico_data
+comm_pico_data<- as.data.frame(comm_pico_data)
+comm_pico_data
+
+mydf2 <- cbind(rownames(comm_pico_data),comm_pico_data)
+rownames(mydf2) <- NULL
+colnames(mydf2) <- c(names(mydf2)) 
+colnames(mydf2)[1] <- "Time" 
+class(mydf2$Time)
+mydf2$Time <- factor(mydf2$Time)
+class(mydf2$Time)
+mydf2$Time <- factor(mydf2$Time, levels = c('Pico5', 'Pico10', 'Pico15', 'Pico20', 'Pico30', 'Pico40', 'Pico50', 'Pico60', 'Pico90', 'Pico120', 'Pico150', 'Pico180'))
 
 
+ggplot(data=mydf2) +
+  geom_line(aes(x = Time, y=SCD_01, color= "SCD_01",group = 1))+
+  geom_line(aes(x = Time, y=FC_02, color = "FC_02", group = 1))+
+  geom_line(aes(x = Time, y=IRL3_02, color= "IRL3_02",group = 1))+
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Picocyanobacteria cells removed (/mL)")
+
+
+ggplot(data=mydf2) +
+  geom_line(aes(x = Time, y=ID_03, color= "ID_03",group = 1))+
+  geom_line(aes(x = Time, y=HI_04, color = "HI_04", group = 1))+
+  geom_line(aes(x = Time, y=FC_03, color= "FC_03",group = 1))+
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Picocyanobacteria cells removed (/mL)")
 
