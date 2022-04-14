@@ -147,3 +147,7 @@ ggplot(data=mydf2) +
 
 coef(lm(mydf2$`Control 1` ~ mydf2$Time))
 
+
+
+
+
