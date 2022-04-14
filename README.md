@@ -69,7 +69,7 @@ This project is broken down into three main pieces of analysis.
 
     - All of the Isotopic Analysis can be found in Lexie's Scripts and Lexie's 
     Graphs folders. 
-    --It is suggested to review all of the required libraries in the 
+    - It is suggested to review all of the required libraries in the 
     IRL_Isotope.Rmd and download any missing libraries prior to running the file. 
     - Specific instructions to download the PriceTools library can also be found 
     in Lexie's Scripts (pending use of it in final project, only preliminary 
