@@ -9,34 +9,29 @@ provided separately for privacy purposes.
 
 ## The goal of this experiement was to examine the role that suspension feeder diversity plays in algal bloom interactions. 
 
-- Culture two species of algae - Picocyano (cyanobacteria) & Pedinophyte 
-(chlorophyte), both are added to buckets of suspension feeders on panels. 
+- Suspension feeders were accumulated on panels in the study site. 
 
--  Both algal cell species labelled with stable isotopes C13 and N15 to 
+- Two species of algae were cultured - Picocyano (cyanobacteria) & Pedinophyte
+(chlorophyte), both of which were added to buckets of suspension feeders on panels. 
+
+-  Both algal cell species were labelled with stable isotopes C13 and N15 to 
 detect for removal after 180min time period of exposure. 
 
-- Record cell removal of algae 0 min - 180 min 
-(Recording cell removal over the course of 3 hours) - 
-This is measured in proportion of original cells to final cells.
+- Flow cytometry data is explained by proportion of final cell counts from original / 1 mL
 
-- Flowcytometry data / 1 ml
-    - Counts number of cells. They can decrease exponentially but do not always. 
-
-- Cells through time curves provide interesting information
-- Abundance data is present on suspension data 
 
 ## Algae decay: 
     -- Hypothesis and preliminary results showing that algal cell removal is 
     increased over time with exposure to suspension feeders, especially in 
-    exposure to those panels with the higher biodiversity/ increased diversity 
+    exposure to those panels with the higher biodiversity and increased diversity 
     of community composition. 
 
 ## Diversity response:
 
     -- Inverse Simpson's Diversity Index calculated among panels & correlated in 
-    linear regression with algal cell removal for Pico & Pedino.
+    linear regression with algal cell removal for both species of algae.
     -- Significant positive correlation (R-squared = 0.47, 0.17) in both models 
-    showing higher diversity correlated directly with more algal cell removal. 
+    showing higher diversity is correlated directly with more algal cell removal. 
 
 ## Community composition effects: 
 
@@ -61,26 +56,29 @@ This is measured in proportion of original cells to final cells.
 
 This project is broken down into three main pieces of analysis. 
 
-The first of which being a FLow Cytometry analysis at the site and panel level. 
-FRANNIE ADD DESCRIPTION OF YOUR PIECES
+    -- The first portion is flow cytometry analysis of algal cell removal over
+    a 3 hour time period with two species of algae and all site panels in order
+    to best understand which panels are most efficient at removing algal cells
+    and why.
+    - All analysis for flow cytometry can be found in Frannie's Scripts and
+    Frannie's Graphs.
 
     -- The second portion of the project is an analysis of Isotopic Enrichment 
     data at the species level as well as site and taxa as well in order to gain
     knowledge of diversity function and individual portfolio effects. 
 
-    -- All of the Isotopic Analysis can be found in Lexie's Scripts and Lexie's 
+    - All of the Isotopic Analysis can be found in Lexie's Scripts and Lexie's 
     Graphs folders. 
-    -- It is suggested to review all of the required libraries in the 
+    - It is suggested to review all of the required libraries in the 
     IRL_Isotope.Rmd and download any missing libraries prior to running the file. 
-    -- Specific instructions to download the PriceTools library can also be found 
-    in Lexie's Scripts (pending use of it in final project... only preliminary 
+    - Specific instructions to download the PriceTools library can also be found 
+    in Lexie's Scripts (pending use of it in final project, only preliminary 
     use as of yet)
 
     -- The third portion of this project is an analysis of the community panel 
-    compositions. This analysis can be found in Lexie's scripts as well as in 
-    ...... FRANNIE wherever u have any from the original panel data if u do
+    compositions. This can be found in Lexie's Script's. 
 
-## note on data
+## Note on data:
 
     -- It has been requested we keep the data for this experiment confidential. 
     If for peer review purposes you would like to request it please contact the 
