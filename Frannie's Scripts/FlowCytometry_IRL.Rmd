@@ -1,7 +1,7 @@
 ---
 title: "Flow Cytometry Data Analysis"
 author: "Francesca Dellacqua"
-date: "4/4/2022"
+date: "4/04/2022"
 output: html_document
 ---
 
@@ -13,19 +13,15 @@ opts_knit$set(tidy=TRUE)
 Flow Cytometry is a method used for detection of characteristics of cells. In this project specifically it was used to detect algal cell removal of a Picocyanobacteria (Pico) species and a Picochlorum species (Pedino). All algal cells were labelled with stable isotopes, 15N for Picocyanobacteria and 13C for Picochlorum (Pedinophyte). The flow cytometry experiment spanned from 0-180 minutes (3 hours), examining proportions of original cells removed to show efficiency of suspension feeder consumption on each panel. Several models below observe which exposed panels were experiencing higher rates of algal cell removal, Simpson's diversity index as an indicator of cell removal efficiency, and overall change in cell proportions. 
 
 ```{r}
-install.packages("readxl")
-cytometry_file = read.xl("edited_community_experiment_data.xlsx",)
-head(cytometry_file)
-cytometry_file$Panel[1]
-```
-
-
-```{r}
 file <- read.csv("Frannie's Scripts/edited_community_experiment_data.csv")
 file
 file <- na.omit(file)
 file
+```
 
+# Organizing and subsetting data - "Pico" refers to picocyanobacteria of study and "Pedino" refers to pedinophyte of study. Time values are labelled 'Pico5, Pico10, Pedino5...' etc. in reference to minutes passed within the flow cytometry experiment for each algal species. 
+
+```{r}
 library(tidyr)
 library(ggplot2)
 
