@@ -1,5 +1,5 @@
-# start.frannie.cyto
-# install.packages ("readxl"")
+## This script contains code sequence for all matplots and boxplots found in Frannie's Graphs folder, as well as working through original code before .csv file change. 
+
 
 library("read_excel")
 cytometry_file = read.xl("edited_community_experiment_data.xlsx",)
