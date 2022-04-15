@@ -123,9 +123,6 @@ geom_point(aes(shape=Panels), size = 2.5) + xlab("Time Values 1-180 Minutes" + y
 ## (would do this probably with 2 of the highest diversity/richness
 ## and the control panel. compare 3 regressions, 3 R-squared values for ease.. need to talk to lexie
 
-
-##question -- how do i do a legend for the lines
-
 ##dpyr::pivot_to_long - this will allow for changing the time 
 ##add rate of change
 ##characterize community response at ecosystem - combine with panel data to see any strong species effect
