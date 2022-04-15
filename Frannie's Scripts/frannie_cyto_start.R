@@ -16,8 +16,9 @@ time_values = list(5, 10, 15, 20, 30, 40, 50, 60, 90, 120, 150, 180)
 plot( time_values, cytometry_file[2,])
 
 Cell_Proportions <- Picocytometry_file[ c(0, 3:14)]
-boxplot(Cell_Proportions, xlab = 'Time Intervals', ylab = 'Average Cell Counts')
+boxplot(Cell_Proportions, xlab = 'Time (Minutes)', ylab = 'Cell proportion from original', main = 'Cell Removal over 3 hour period for Picocyanobacteria')
 
+ 
 ## Read.xlsx function not working for me so -- 
 
 library(readxl)
@@ -77,18 +78,18 @@ Pico_SCD = pico_cytometry[c(19:21),]
 Pico_SMS = pico_cytometry[c(22:23),]
 Pico_WP = pico_cytometry[c(24:26),]
 Pico_Control = pico_cytometry[c(28:30),]
-matplot(t(pedino_FC), type = "l")
-matplot(t(pedino_HI), type = "l")
-matplot(t(pedino_ID), type = "l")
-matplot(t(pedinoIRL3), type = "l")
-matplot(t(pedinoMIM), type = "l")
-matplot(t(pedinoMO), type = "l")
-matplot(t(pedinoSCD), type = "l")
-matplot(t(pedinoSMS), type = "l")
-matplot(t(pedinoWP), type = "l")
-matplot(t(pedinoControl), type = "l")
+matplot(t(pedino_FC), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Pedinophyte FC Panel Cell Removal")
+matplot(t(pedino_HI), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Pedinophyte FC Panel Cell Removal")
+matplot(t(pedino_ID), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Pedinophyte FC Panel Cell Removal")
+matplot(t(pedinoIRL3), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Pedinophyte FC Panel Cell Removal")
+matplot(t(pedinoMIM), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Pedinophyte FC Panel Cell Removal")
+matplot(t(pedinoMO), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Pedinophyte FC Panel Cell Removal")
+matplot(t(pedinoSCD), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Pedinophyte FC Panel Cell Removal")
+matplot(t(pedinoSMS), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Pedinophyte FC Panel Cell Removal")
+matplot(t(pedinoWP), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Pedinophyte FC Panel Cell Removal")
+matplot(t(pedinoControl), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Pedinophyte Control Panel Cell Removal")
 legend("top right", as.character(nr), col = cols, cex = 0.5, lty = ltyp, ncol = 3)
-matplot(t(Pico_FC), type = "l")
+matplot(t(Pico_FC), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Picocyanobacteria FC Panel Cell Removal")
 matplot(t(Pico_HI), type = "l")
 matplot(t(Pico_ID), type = "l")
 matplot(t(Pico_IRL3), type = "l")
@@ -97,7 +98,7 @@ matplot(t(Pico_MO), type = "l")
 matplot(t(Pico_SCD), type = "l")
 matplot(t(Pico_SMS), type = "l")
 matplot(t(Pico_WP), type = "l")
-matplot(t(Pico_Control), type = "l")
+matplot(t(Pico_Control), type = "l", xlab = "Time Interval", ylab = "Cell Proportions", main = "Picocyanobacteria Control Panel Cell Removal")
 ## do i need to skew data here? I feel like they are the most explanatory, even more than if timew was labeled 1-180 b/c they are simple.. but just need a legend for the lines
 install.packages(ggplot2)
 library(ggplot2)
