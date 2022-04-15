@@ -147,7 +147,9 @@ ggplot(data=mydf2) +
 
 coef(lm(mydf2$`Control 1` ~ mydf2$Time))
 
-
-
+install.packages("zoo")
+library(zoo)
+library(ggplot2)
+autoplot(zoo(mydf), facet = NULL)
 
 
