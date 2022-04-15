@@ -148,8 +148,47 @@ ggplot(data=mydf2) +
 coef(lm(mydf2$`Control 1` ~ mydf2$Time))
 
 install.packages("zoo")
+yes
 library(zoo)
 library(ggplot2)
 autoplot(zoo(mydf), facet = NULL)
 
+# ggplot(data=mydf) +
+#   geom_line(aes(x = Time["Pedino180"], y=ID_03, color= "ID_03",group = 1))+
+  
+subset_plot_pedino <- subset(mydf, Time == "Pedino180" | Time == "Pedino150")
+subset_plot_pedino
+
+ggplot(data=subset_plot_pedino) +
+  geom_line(aes(x = Time, y=`Control 1`, color= "Control 1",group = 1))+
+  geom_line(aes(x = Time, y=`Control 2`, color ="Control 2", group = 1))+
+  geom_line(aes(x = Time, y=`Control 3`, color = "Control 3", group = 1))+
+  geom_line(aes(x = Time, y=FC_01, color = "FC_01", group = 1))+
+  geom_line(aes(x = Time, y=FC_02, color = "FC_02", group = 1))+
+  geom_line(aes(x = Time, y=FC_03, color = "FC_03", group = 1))+
+  geom_line(aes(x = Time, y=HI_02, color = "HI_02", group = 1))+
+  geom_line(aes(x = Time, y=HI_03, color = "HI_03", group = 1))+
+  geom_line(aes(x = Time, y=HI_04, color = "HI_04", group = 1))+
+  geom_line(aes(x = Time, y=ID_01, color = "ID_01", group = 1))+
+  geom_line(aes(x = Time, y=ID_03, color= "ID_03", group = 1))+ 
+  geom_line(aes(x = Time, y=IRL3_01, color = "IRL3_01", group = 1))+
+  geom_line(aes(x = Time, y=IRL3_02, color = "IRL3_02", group = 1))+
+  geom_line(aes(x = Time, y=IRL3_03, color = "IRL3_03", group = 1))+
+  geom_line(aes(x = Time, y=IRL3_04, color= "IRL3_04", group = 1))+ 
+  geom_line(aes(x = Time, y=MIM_01, color = "MIM_01", group = 1))+
+  geom_line(aes(x = Time, y=MIM_02, color= "MIM_02", group = 1))+ 
+  geom_line(aes(x = Time, y=MO_01, color= "MO_01", group = 1))+ 
+  geom_line(aes(x = Time, y=MO_02, color = "MO_02", group = 1))+
+  geom_line(aes(x = Time, y=MO_03, color= "MO_03", group = 1))+ 
+  geom_line(aes(x = Time, y=SCD_01, color = "SCD_01", group = 1))+
+  geom_line(aes(x = Time, y=SCD_02, color= "SCD_02", group = 1))+ 
+  geom_line(aes(x = Time, y=SCD_03, color= "SCD_03", group = 1))+ 
+  geom_line(aes(x = Time, y=SMS_01, color = "SMS_01", group = 1))+
+  geom_line(aes(x = Time, y=SMS_03, color = "SMS_03", group = 1))+
+  geom_line(aes(x = Time, y=WP_01, color= "WP_01", group = 1))+ 
+  geom_line(aes(x = Time, y=WP_03, color = "WP_03", group = 1))+
+  geom_line(aes(x = Time, y=WP_04, color= "WP_04", group = 1))+ 
+  ylim(NA,100)+
+  xlab("Time (minutes)")+
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
 
