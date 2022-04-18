@@ -83,7 +83,9 @@ ggplot(data=mydf) +
   geom_line(aes(x = Time, y=`Control 1`, color= "Control 1",group = 1))+ 
   ylim(NA,100)+
   xlab("Time (minutes)")+
-  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)") +
+  ggtitle("Pedinophyte Cell Removal with high and low diversity index")
+
   
   
 Long_Pico = pico_subset %>% 
@@ -143,7 +145,8 @@ ggplot(data=mydf2) +
   geom_line(aes(x = Time, y=`Control 1`, color= "Control 1",group = 1))+ 
   ylim(NA,100)+
   xlab("Time (minutes)")+
-  ylab("Proportion of Original Picocyanobacteria cells removed (/mL)")
+  ylab("Proportion of Original Picocyanobacteria cells removed (/mL)") +
+  ggtitle("Picocyanobacteria Cell Removal with high and low diversity index")
 
 coef(lm(mydf2$`Control 1` ~ mydf2$Time))
 
@@ -190,7 +193,8 @@ ggplot(data=subset_plot_pedino) +
   geom_line(aes(x = Time, y=WP_04, color= "WP_04", group = 1))+ 
   ylim(NA,100)+
   xlab("Time (minutes)")+
-  ylab("Proportion of Original Pedinophtye cells removed (/mL)")
+  ylab("Proportion of Original Pedinophtye cells removed (/mL)") + 
+  ggtitle("Picocyanobacteria Cell Removal Across all Panels (150-180min")
 
 
 subset_plot_pico <- subset(mydf2, Time == "Pico180" | Time == "Pico150")
@@ -227,6 +231,7 @@ ggplot(data=subset_plot_pico) +
   geom_line(aes(x = Time, y=WP_04, color= "WP_04", group = 1))+ 
   ylim(NA,100)+
   xlab("Time (minutes)")+
-  ylab("Proportion of Original Picocyanobacteria cells removed (/mL)")
+  ylab("Proportion of Original Picocyanobacteria cells removed (/mL)") +
+  ggtitle("Picocyanobacteria Cell Removal Across all Panels (150-180min")
 
 
