@@ -266,6 +266,9 @@ ggplot(data=subset_plot_pico) +
 ```
 
 
+## Flow cytometry data aligns with overall hypothesis and findings that higher rates and ability for cell removal do have a positive correlation with species and panel biodiversity. 
+
+
 
 
 
