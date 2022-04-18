@@ -68,5 +68,6 @@ comm_data <- ifelse(is.na(comm_data), 0, comm_data)
 ```{r}
 diversity_indexes <- diversity(comm_data,"simpson")
 diversity_indexes
+sort(diversity_indexes)
 ```
 
