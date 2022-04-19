@@ -13,7 +13,7 @@ opts_knit$set(tidy=TRUE)
 Flow Cytometry is a method used for detection of characteristics of cells. In this project specifically it was used to detect algal cell removal of a Picocyanobacteria (Pico) species and a Picochlorum species (Pedino). All algal cells were labelled with stable isotopes, 15N for Picocyanobacteria and 13C for Picochlorum (Pedinophyte). The flow cytometry experiment spanned from 0-180 minutes (3 hours), examining proportions of original cells removed to show efficiency of suspension feeder consumption on each panel. Several models below observe which exposed panels were experiencing higher rates of algal cell removal, Simpson's diversity index as an indicator of cell removal efficiency, and overall change in cell proportions. 
 
 ```{r}
-file <- read.csv("Frannie's Scripts/edited_community_experiment_data.csv")
+file <- read.csv("edited_community_experiment_data.csv")
 file
 file <- na.omit(file)
 file
@@ -175,7 +175,6 @@ ggplot(data=mydf2) +
   xlab("Time (minutes)")+
   ylab("Proportion of Original Picocyanobacteria cells removed (/mL)")
 
-coef(lm(mydf2$`Control 1` ~ mydf2$Time))
 
 ```
 
@@ -220,7 +219,7 @@ ggplot(data=subset_plot_pedino) +
   ylim(NA,100)+
   xlab("Time (minutes)")+
   ylab("Proportion of Original Pedinophtye cells removed (/mL)") + 
-  ggtitle("Picocyanobacteria Cell Removal Across all Panels (150-180min")
+  ggtitle("Pedinophyte Cell Removal Across all Panels (150-180min")
 ```
 
 
@@ -264,9 +263,6 @@ ggplot(data=subset_plot_pico) +
   ylab("Proportion of Original Picocyanobacteria cells removed (/mL)") +
   ggtitle("Picocyanobacteria Cell Removal Across all Panels (150-180min")
 ```
-
-
-## Flow cytometry data aligns with overall hypothesis and findings that higher rates and ability for cell removal do have a positive correlation with species and panel biodiversity. 
 
 
 
